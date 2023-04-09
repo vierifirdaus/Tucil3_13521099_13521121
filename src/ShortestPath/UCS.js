@@ -73,6 +73,7 @@ function UCS(graph, start, finish){
 function parserInputUCS(graph){
     const rows = graph.trim().split("\n");
     const matrix = rows.map((row) => row.split(" ").map((val) => parseInt(val)));
+    console.log(matrix)
     return matrix;
 }
 

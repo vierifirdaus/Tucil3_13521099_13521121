@@ -22,14 +22,14 @@ function App() {
 
   const onSearchPathHandler = (value) => {
     if (!showMap) {
-      const start=3
+      const start=1
       const finish=4
 
       if(UCS(parserInputUCS(fileContent), start, finish).pathTotal===null){
         setPath([])
       }
       else{
-        setPath(path.pathTotal)
+        setPath(UCS(parserInputUCS(fileContent), start, finish).pathTotal)
       }
 
     } else {
@@ -40,7 +40,7 @@ function App() {
         setPath([])
       }
       else{
-        setPath(path.pathTotal)
+        setPath(aStar(parserInputA(fileContent).matrix,parserInputA(fileContent).coordinates,start,finish).pathTotal)
       }
 
     }
