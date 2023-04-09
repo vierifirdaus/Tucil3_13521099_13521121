@@ -70,13 +70,13 @@ function UCS(graph, start, finish){
     return {pathTotal,weight}
 }
 
-function parserInput(graph){
+function parserInputUCS(graph){
     const rows = graph.trim().split("\n");
     const matrix = rows.map((row) => row.split(" ").map((val) => parseInt(val)));
     return matrix;
 }
 
-export  {UCS,parserInput};
+export  {UCS,parserInputUCS};
 
 const graph1=[
     [0,2,1,0,0],

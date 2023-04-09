@@ -3,7 +3,8 @@ import Toolbar from "./Toolbar/Toolbar";
 import Map from "./Map/Map";
 import { useState } from "react";
 import NetworkGraph from "./NetworkGraph/NetworkGraph";
-import {UCS,parserInput} from "./ShortestPath/UCS";
+import {UCS,parserInputUCS} from "./ShortestPath/UCS";
+import {aStar,parserInputA } from "./ShortestPath/Astar";
 
 function App() {
   const [showMap, setShowMap] = useState(false);
@@ -24,7 +25,7 @@ function App() {
       const start=3
       const finish=4
 
-      if(UCS(parserInput(fileContent), start, finish).pathTotal===null){
+      if(UCS(parserInputUCS(fileContent), start, finish).pathTotal===null){
         setPath([])
       }
       else{
@@ -32,6 +33,15 @@ function App() {
       }
 
     } else {
+      const start=3
+      const finish=4
+
+      if(aStar(parserInputA(fileContent).matrix,parserInputA(fileContent).coordinates,start,finish).pathTotal===null){
+        setPath([])
+      }
+      else{
+        setPath(path.pathTotal)
+      }
 
     }
   };
