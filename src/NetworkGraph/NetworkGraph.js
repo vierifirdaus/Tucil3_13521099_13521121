@@ -18,7 +18,8 @@ function NetworkGraph(props) {
       setGraphKey(uuidv4());
       setStartEndNodes([-1, -1]);
     }
-    var graph = parseWeightedAdjacencyMatrix(props.content);
+    
+    var graph = createGraph(props.content);
     const options = {
       layout: {
         hierarchical: false,
@@ -28,9 +29,11 @@ function NetworkGraph(props) {
         width: 2,
         arrows: { to: { enabled: false } },
       },
+      physics: false,
       nodes: {
         shape: "circle", // Set shape to "dot"
         color: { background: "#319795", border: "#ffffff" },
+        fixed: true,
         font: {
           color: "#ffffff",
         },
@@ -75,9 +78,9 @@ function NetworkGraph(props) {
       ...graph,
       nodes: modifiedNodes,
     };
-    console.log(props.path)
+    // console.log(props.path);
     if (props.path.length != 0) {
-      console.log(props.path)
+      // console.log(props.path);
       modifiedGraphData = colorEdgesBetweenNodes(props.path, modifiedGraphData);
     }
 
@@ -98,53 +101,45 @@ function NetworkGraph(props) {
 
 export default NetworkGraph;
 
-function parseWeightedAdjacencyMatrix(matrixString) {
-  const rows = matrixString.trim().split("\n");
-  const matrix = rows.map((row) => row.split(" ").map((val) => parseInt(val)));
+function createGraph(adjacencyMatrixString) {
+  // rekomendasi jarak antar node adalah > 10 supaya tidak terlihat terlalu dempet  
+  const asArray = adjacencyMatrixString
+    .split("\n")
+    .map((row) => row.split(" ").map((val) => parseInt(val)));
+  console.log(asArray);
 
-  const nodes = matrix.map((row, index) => ({
-    id: index,
-    label: `Node ${index}`,
-  }));
+  var n = -1;
+  for (let i = 0; i < asArray.length; i++) {
+    if (asArray[i].length == 1) {
+      n = i;
+    }
+  }
+  // console.log(n);
+
+  const adjacencyMatrix = asArray.slice(0, n+1);
+  const coordinates = asArray.slice(n+1, asArray.length);
+
+  // console.log(adjacencyMatrix);
+  // console.log(coordinates);
+
+  // Create the nodes for the graph
+  const nodes = coordinates.map((coord, index) => {
+    return { id: index + 1, x: coord[0]*10, y: coord[1]*10, label: "Node " + index};
+  });
+
+  // Create the edges for the graph
   const edges = [];
-
-  var sum = 0;
-  for (let i = 0; i < matrix.length; i++) {
-    for (let j = i + 1; j < matrix[i].length; j++) {
-      if (matrix[i][j] !== 0 && matrix[i][j].toString() != "NaN") {
-        sum += matrix[i][j];
+  for (let i = 0; i < adjacencyMatrix.length; i++) {
+    for (let j = i + 1; j < adjacencyMatrix[i].length; j++) {
+      if (adjacencyMatrix[i][j] === 1) {
+        console.log(coordinates[i]);
+        console.log(coordinates[j]);
+        const length = Math.sqrt(Math.pow(coordinates[j][0] - coordinates[i][0], 2) + Math.pow(coordinates[j][1] - coordinates[i][1], 2)).toFixed(1);
+        edges.push({ from: i + 1, to: j + 1, label: length, length: length});
       }
     }
   }
-
-  var pengali = 1;
-  var rasio = sum / matrix.length;
-  if (rasio < 5) {
-    pengali = 30;
-  } else if (rasio < 10) {
-    pengali = 25;
-  } else if (rasio < 15) {
-    pengali = 20;
-  } else if (rasio < 20) {
-    pengali = 15;
-  } else {
-    pengali = 10;
-  }
-
-  for (let i = 0; i < matrix.length; i++) {
-    for (let j = i + 1; j < matrix[i].length; j++) {
-      if (matrix[i][j] !== 0 && matrix[i][j].toString() != "NaN") {
-        edges.push({
-          from: i,
-          to: j,
-          label: matrix[i][j].toString(),
-          length: matrix[i][j] * pengali,
-        });
-      }
-    }
-  }
-
-  return { nodes: nodes, edges: edges };
+  return { nodes, edges };
 }
 
 function colorEdgesBetweenNodes(nodesList, graph) {
