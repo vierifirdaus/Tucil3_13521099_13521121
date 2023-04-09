@@ -28,15 +28,17 @@ class PriorityQueue{
         return this.elements.length === 0;
     }
 }
-function setStartEnd(start, finish){
-    return [start,finish]
-}
+
 function UCS(graph, start, finish){
     const liveNode = new PriorityQueue()
     
     liveNode.enqueue([start],0)
     let pathTotal=null
 
+    if(start<0 || finish<0 || start>=graph.length || finish>=graph.length){
+        pathTotal=null
+    }
+    
     const weight = new Array(graph.length).fill(Infinity)
     weight[start] = 0
 

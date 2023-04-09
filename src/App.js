@@ -21,9 +21,16 @@ function App() {
 
   const onSearchPathHandler = (value) => {
     if (!showMap) {
-      const start=0
+      const start=3
       const finish=4
-      setPath(UCS(parserInput(fileContent), start, finish).pathTotal)
+
+      if(UCS(parserInput(fileContent), start, finish).pathTotal===null){
+        setPath([])
+      }
+      else{
+        setPath(path.pathTotal)
+      }
+
     } else {
 
     }
