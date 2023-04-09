@@ -70,7 +70,7 @@ function Toolbar(props) {
           colorScheme="teal"
           aria-label="center back"
           icon={<FaLocationArrow />}
-          onClick={() => alert(123)}
+          onClick={() => props.onSearch()}
         />
       </HStack>
     </Box>

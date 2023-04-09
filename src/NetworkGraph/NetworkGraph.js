@@ -71,10 +71,16 @@ function NetworkGraph(props) {
       };
     });
 
-    const modifiedGraphData = {
+    let modifiedGraphData = {
       ...graph,
       nodes: modifiedNodes,
     };
+    console.log(props.path)
+    if (props.path.length != 0) {
+      console.log(props.path)
+      modifiedGraphData = colorEdgesBetweenNodes(props.path, modifiedGraphData);
+    }
+
     returnVal = (
       <Graph
         key={graphKey}
