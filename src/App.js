@@ -9,10 +9,24 @@ import NetworkGraph from "./NetworkGraph/NetworkGraph";
 
 function App() {
   const [showMap, setShowMap] = useState(false);
+  const [fileContent, setFileContent] = useState("");
 
-  const handleOnSwitchToggle = (newSwitchValue) => {
-    setShowMap(newSwitchValue);
+  const handleOnSwitchToggle = (value) => {
+    setFileContent("");
+    setShowMap(value);
   }
+
+  var handleOnReadFile;
+
+  if (!showMap) {
+    handleOnReadFile = (value) => {
+      setFileContent(value);
+    }    
+  } else {
+
+  }
+
+
 
   return (
     <Flex
@@ -22,13 +36,13 @@ function App() {
       bgPos="bottom"
       h="100vh"
       w="100vw"
-      bgColor={"white"}
+      bgColor={"gray.800"}
     >
       <Box position="absolute" left={0} top={0} h="100%" w="100%">
         {showMap && <Map />}
-        {!showMap && <NetworkGraph />}
+        {!showMap && <NetworkGraph content={fileContent} />}
       </Box>
-      <Toolbar onSwitchToggle={handleOnSwitchToggle}/>
+      <Toolbar onSwitchToggle={handleOnSwitchToggle} onReadFile={handleOnReadFile}/>
     </Flex>
   );
 }

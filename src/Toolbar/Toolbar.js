@@ -14,8 +14,6 @@ import { useRef, useState } from "react";
 import { FaLocationArrow, FaTimes } from "react-icons/fa";
 
 function Toolbar(props) {
-  const [fileContent, setFileContent] = useState("");
-  
   const handleSwitchToggle = (event) => {
     const newSwitchValue = event.target.checked;
     props.onSwitchToggle(newSwitchValue);
@@ -31,7 +29,7 @@ function Toolbar(props) {
 
       reader.onload = function (event) {
         const contents = event.target.result;
-        setFileContent(contents);
+        props.onReadFile(contents);
       };
 
       reader.readAsText(file);
@@ -53,7 +51,7 @@ function Toolbar(props) {
         <Switch
           id="mapToggle"
           size="lg"
-          colorScheme="pink"
+          colorScheme="teal"
           onChange={handleSwitchToggle}
         />
         <VStack align="start" spacing={0}>
@@ -65,11 +63,11 @@ function Toolbar(props) {
           </Text>
         </VStack>
         <Spacer />
-        <Button colorScheme="pink" onClick={openFileDialog}>
+        <Button colorScheme="teal" onClick={openFileDialog}>
           Choose File
         </Button>
         <IconButton
-          colorScheme="pink"
+          colorScheme="teal"
           aria-label="center back"
           icon={<FaLocationArrow />}
           onClick={() => alert(123)}
