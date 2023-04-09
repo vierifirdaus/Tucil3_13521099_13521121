@@ -143,7 +143,7 @@ function parseWeightedAdjacencyMatrix(matrixString) {
       }
     }
   }
-
+  console.log(edges,nodes)
   return { nodes: nodes, edges: edges };
 }
 

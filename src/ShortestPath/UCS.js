@@ -28,10 +28,12 @@ class PriorityQueue{
         return this.elements.length === 0;
     }
 }
-
+function setStartEnd(start, finish){
+    return [start,finish]
+}
 function UCS(graph, start, finish){
     const liveNode = new PriorityQueue()
-
+    
     liveNode.enqueue([start],0)
     let pathTotal=null
 
@@ -66,12 +68,27 @@ function UCS(graph, start, finish){
     return {pathTotal,weight}
 }
 
+function parserInput(graph){
+    const rows = graph.trim().split("\n");
+    const matrix = rows.map((row) => row.split(" ").map((val) => parseInt(val)));
+    return matrix;
+}
+
+export  {UCS,parserInput};
+
 const graph1=[
     [0,2,1,0,0],
     [2,0,2,0,2],
     [1,2,0,1,0],
     [0,0,1,0,1],
     [0,2,0,1,0]]
+const graph3=[
+    [0,20,30,0,0],
+    [20,0,15,20,0],
+    [30,15,0,0,13],
+    [0,20,0,0,9],
+    [0,0,13,9,0]
+]
 const graph2=[
     [0,1,2,0,0,0,0], //a
     [1,0,1,0,8,0,0], //b
@@ -81,5 +98,7 @@ const graph2=[
     [0,0,4,2,0,0,0], //f
     [0,0,0,1,8,0,0]  //g
 ]
-console.log("pathtotal",UCS(graph2,0,4).pathTotal)
-// console.log("weight",UCS(graph2,0,4).weight)
+
+
+// console.log("pathtotal",UCS(graph3,2,3).pathTotal)
+// console.log("weight",UCS(graph3,2,3).weight[3])

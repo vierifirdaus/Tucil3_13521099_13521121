@@ -3,6 +3,7 @@ import Toolbar from "./Toolbar/Toolbar";
 import Map from "./Map/Map";
 import { useState } from "react";
 import NetworkGraph from "./NetworkGraph/NetworkGraph";
+import {UCS,parserInput} from "./ShortestPath/UCS";
 
 function App() {
   const [showMap, setShowMap] = useState(false);
@@ -20,7 +21,9 @@ function App() {
 
   const onSearchPathHandler = (value) => {
     if (!showMap) {
-      setPath([2,4,3])
+      const start=0
+      const finish=4
+      setPath(UCS(parserInput(fileContent), start, finish).pathTotal)
     } else {
 
     }
