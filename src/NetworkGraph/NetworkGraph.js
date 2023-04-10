@@ -18,7 +18,7 @@ function NetworkGraph(props) {
       setStartEndNodes([-1, -1]);
       props.newGraph();
     }
-    
+
     const graph = createGraph(props.content);
     const options = {
       layout: {
@@ -35,7 +35,7 @@ function NetworkGraph(props) {
         color: { background: "#319795", border: "#ffffff" },
         fixed: true,
         font: {
-          color: "#ffffff",
+          color: "white",
         },
         size: 20,
       },
@@ -60,15 +60,24 @@ function NetworkGraph(props) {
 
     const modifiedNodes = graph.nodes.map((node) => {
       let color = "#319795";
+      let label = node.label;
+      let font = "white";
       if (startEndNodes[0] === node.id) {
         // start
-        color = "#38A169";
+        color = "#D53F8C";
+        label = "  Start  ";
+        // font = "black";
       } else if (startEndNodes[1] === node.id) {
         // end
-        color = "#E53E3E";
+        color = "#C53030";
+        label = "  End   ";
       }
       return {
         ...node,
+        label: label,
+        font : {
+          color: font,
+        },
         color: {
           background: color,
           border: "#ffffff",
@@ -102,7 +111,7 @@ function NetworkGraph(props) {
 export default NetworkGraph;
 
 function createGraph(adjacencyMatrixString) {
-  // rekomendasi jarak antar node adalah > 10 supaya tidak terlihat terlalu dempet  
+  // rekomendasi jarak antar node adalah > 10 supaya tidak terlihat terlalu dempet
   const asArray = adjacencyMatrixString
     .split("\n")
     .map((row) => row.split(" ").map((val) => parseInt(val)));
@@ -114,12 +123,17 @@ function createGraph(adjacencyMatrixString) {
     }
   }
 
-  const adjacencyMatrix = asArray.slice(0, n+1);
-  const coordinates = asArray.slice(n+1, asArray.length);
+  const adjacencyMatrix = asArray.slice(0, n + 1);
+  const coordinates = asArray.slice(n + 1, asArray.length);
 
   // Create the nodes for the graph
   const nodes = coordinates.map((coord, index) => {
-    return { id: index , x: coord[0]*10, y: coord[1]*10, label: "Node " + index};
+    return {
+      id: index,
+      x: coord[0] * 10,
+      y: coord[1] * 10,
+      label: "Node " + index,
+    };
   });
 
   // Create the edges for the graph
@@ -127,8 +141,11 @@ function createGraph(adjacencyMatrixString) {
   for (let i = 0; i < adjacencyMatrix.length; i++) {
     for (let j = i + 1; j < adjacencyMatrix[i].length; j++) {
       if (adjacencyMatrix[i][j] === 1) {
-        const length = Math.sqrt(Math.pow(coordinates[j][0] - coordinates[i][0], 2) + Math.pow(coordinates[j][1] - coordinates[i][1], 2)).toFixed(1);
-        edges.push({ from: i , to: j , label: length, length: length});
+        const length = Math.sqrt(
+          Math.pow(coordinates[j][0] - coordinates[i][0], 2) +
+            Math.pow(coordinates[j][1] - coordinates[i][1], 2)
+        ).toFixed(1);
+        edges.push({ from: i, to: j, label: length, length: length });
       }
     }
   }
@@ -137,11 +154,11 @@ function createGraph(adjacencyMatrixString) {
 
 function colorEdgesBetweenNodes(nodesList, graph) {
   const { nodes, edges } = graph;
- 
+
   edges.forEach((edge) => {
     edge.color = "#ffffff";
   });
-  
+
   edges.forEach((edge) => {
     if (nodesList.includes(edge.from) && nodesList.includes(edge.to)) {
       edge.color = "red";

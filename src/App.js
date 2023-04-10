@@ -10,6 +10,7 @@ import SidebarAlgo from "./Sidebar/SidebarAlgo";
 function App() {
   const [showMap, setShowMap] = useState(false);
   const [path, setPath] = useState(null);
+  const [distance, setDistance] = useState(0);
   const [fileContent, setFileContent] = useState("");
   const [startEnd, setStartEnd] = useState([-1, -1]);
   const [selectedAlgo, setSelectedAlgo] = useState("UCS");
@@ -46,14 +47,15 @@ function App() {
     } else {
       if (!showMap) {
         const parser = parserInputA(fileContent);
+        let res;
         if (selectedAlgo == "UCS") {
-          setPath(UCS(parser.matrix, startEnd[0], startEnd[1]).pathTotal);
+          res = UCS(parser.matrix, startEnd[0], startEnd[1]); 
         } else {
-          setPath(
-            aStar(parser.matrix, parser.coordinates, startEnd[0], startEnd[1])
-              .pathTotal
-          );
+          res = aStar(parser, startEnd[0], startEnd[1]);
         }
+        setPath(res.pathTotal);
+        setDistance(res.weight);
+
       } else {
         const start = 3;
         const finish = 4;
@@ -108,7 +110,7 @@ function App() {
         onSearch={onSearchPathHandler}
       />
       <SidebarAlgo
-        tabs={["UCS", "A*"]}
+        tabs={[distance, "UCS", "A*"]}
         selected={selectedAlgo}
         onChange={handleAlgoChange}
         // ml="auto"

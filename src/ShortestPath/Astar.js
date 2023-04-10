@@ -33,7 +33,9 @@ function distance(a,b){
     return Math.sqrt((a[0]-b[0])**2 + (a[1]-b[1])**2)
 }
 
-function aStar(graph, point, start, finish){
+function aStar(fullGraph, start, finish){
+    let graph = fullGraph.matrix;
+    let point = fullGraph.coordinates;
     const liveNode = new PriorityQueue()
 
     liveNode.enqueue([start],0)
@@ -55,7 +57,7 @@ function aStar(graph, point, start, finish){
         for(let i=0;i<graph[current.element[0]].length;i++){
             if(graph[current.element[0]][i] !== 0){
                 const newDistance = weight[current.element[0]] + graph[current.element[0]][i]
-                console.log(current.element[0],i) 
+                // console.log(current.element[0],i) 
                 if(newDistance < weight[i]){
                     const straightLineDistance = distance(point[i],point[finish])
                     const totalDistance= newDistance + straightLineDistance
