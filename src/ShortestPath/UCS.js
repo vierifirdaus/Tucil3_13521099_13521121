@@ -78,7 +78,7 @@ function parserInputUCS(graph){
 
 export  {UCS,parserInputUCS};
 
-const graph1=[
+const graph21=[
     [0,2,1,0,0],
     [2,0,2,0,2],
     [1,2,0,1,0],
@@ -100,7 +100,28 @@ const graph2=[
     [0,0,4,2,0,0,0], //f
     [0,0,0,1,8,0,0]  //g
 ]
+// function distance(a,b){
+//     return Math.sqrt((a[0]-b[0])**2 + (a[1]-b[1])**2)
+// }
 
+// const graph1=[
+//     [0,0,0,1,0,0,0,0,1],
+// [0,0,0,0,0,1,0,1,0],
+// [0,0,0,1,1,0,0,1,0],
+// [1,0,1,0,0,0,0,1,0],
+// [0,0,1,0,0,0,0,0,1],
+// [0,1,0,0,0,1,1,0,1],
+// [0,0,0,0,0,1,0,1,0],
+// [0,1,1,1,0,0,1,0,0],
+// [1,0,0,0,1,1,0,0,0] //i 8
+// ]
+// const point1 =[[30,40],[15,3],[0,0],[0,40],[30,0],[30,30],[30,20],[10,10],[60,40]]
+// for(let i=0;i<9;i++){
+//     for(let j=0;j<9;j++){
+//         if(graph1[i][j]!==0){
+//             graph1[i][j] = distance(point1[i],point1[j])
+//         }
+//     }
+// }
 
-// console.log("pathtotal",UCS(graph3,2,3).pathTotal)
-// console.log("weight",UCS(graph3,2,3).weight[3])
+// console.log(UCS(graph1,2,8))

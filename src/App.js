@@ -28,9 +28,13 @@ function App() {
 
   const onSearchPathHandler = (value) => {
     if (!showMap) {
-      const start = 0;
-      const finish = 4;
-      setPath(UCS(parserInputA(fileContent).matrix, start, finish).pathTotal);
+      const start = 2;
+      const finish = 8;
+      console.log(parserInputA(fileContent).matrix)
+      console.log(parserInputA(fileContent).coordinates)
+      // setPath(aStar(parserInputA(fileContent).matrix,parserInputA(fileContent).coordinates, start, finish).pathTotal);
+      setPath(UCS(parserInputA(fileContent).matrix ,start, finish).pathTotal);
+      console.log(UCS(parserInputA(fileContent).matrix ,start, finish).pathTotal)
     } else {
       const start = 3;
       const finish = 4;

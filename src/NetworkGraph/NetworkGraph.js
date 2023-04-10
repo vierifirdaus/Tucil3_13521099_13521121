@@ -85,7 +85,7 @@ function NetworkGraph(props) {
     };
     // console.log(props.path);
     if (props.path !== null) {
-      console.log(props.path);
+      // console.log(props.path);
       modifiedGraphData = colorEdgesBetweenNodes(props.path, modifiedGraphData);
     }
 
@@ -155,7 +155,7 @@ function colorEdgesBetweenNodes(nodesList, graph) {
   });
   
   edges.forEach((edge) => {
-    console.log(edge);
+    // console.log(edge);
     if (nodesList.includes(edge.from) && nodesList.includes(edge.to)) {
       edge.color = "red";
     }
