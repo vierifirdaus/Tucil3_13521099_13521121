@@ -10,16 +10,18 @@ function NetworkGraph(props) {
   const [content, setContent] = useState("");
   var returnVal;
   // console.log(startEndNodes)
-  if (props.content == "") {
+  if (props.content === "") {
     returnVal = null;
   } else {
-    if (content != props.content) {
+    if (content !== props.content) {
       setContent(props.content);
       setGraphKey(uuidv4());
       setStartEndNodes([-1, -1]);
+      props.newGraph();
     }
     
-    var graph = createGraph(props.content);
+    const graph = createGraph(props.content);
+    // console.log(graph);
     const options = {
       layout: {
         hierarchical: false,
@@ -43,24 +45,27 @@ function NetworkGraph(props) {
     const handleNodeClick = (event) => {
       const { nodes } = event;
       const clickedNodeId = nodes[0];
-      if (startEndNodes[0] == clickedNodeId) {
+      if (startEndNodes[0] === clickedNodeId) {
         setStartEndNodes([-1, startEndNodes[1]]);
-      } else if (startEndNodes[1] == clickedNodeId) {
+        props.onStartEndNodeClick([-1, startEndNodes[1]]);
+      } else if (startEndNodes[1] === clickedNodeId) {
         setStartEndNodes([startEndNodes[0], -1]);
-      } else if (startEndNodes[0] == -1) {
+        props.onStartEndNodeClick([startEndNodes[0], -1]);
+      } else if (startEndNodes[0] === -1) {
         setStartEndNodes([clickedNodeId, startEndNodes[1]]);
-      } else if (startEndNodes[1] == -1) {
-        startEndNodes[1] = clickedNodeId;
+        props.onStartEndNodeClick([clickedNodeId, startEndNodes[1]]);
+      } else if (startEndNodes[1] === -1) {
         setStartEndNodes([startEndNodes[0], clickedNodeId]);
+        props.onStartEndNodeClick([startEndNodes[0], clickedNodeId]);
       }
     };
 
     const modifiedNodes = graph.nodes.map((node) => {
       let color = "#319795";
-      if (startEndNodes[0] == node.id) {
+      if (startEndNodes[0] === node.id) {
         // start
         color = "#38A169";
-      } else if (startEndNodes[1] == node.id) {
+      } else if (startEndNodes[1] === node.id) {
         // end
         color = "#E53E3E";
       }
@@ -79,7 +84,7 @@ function NetworkGraph(props) {
       nodes: modifiedNodes,
     };
     // console.log(props.path);
-    if (props.path.length != 0) {
+    if (props.path !== null) {
       // console.log(props.path);
       modifiedGraphData = colorEdgesBetweenNodes(props.path, modifiedGraphData);
     }
@@ -106,11 +111,11 @@ function createGraph(adjacencyMatrixString) {
   const asArray = adjacencyMatrixString
     .split("\n")
     .map((row) => row.split(" ").map((val) => parseInt(val)));
-  console.log(asArray);
+  // console.log(asArray);
 
   var n = -1;
   for (let i = 0; i < asArray.length; i++) {
-    if (asArray[i].length == 1) {
+    if (asArray[i].length === 1) {
       n = i;
     }
   }
@@ -132,8 +137,8 @@ function createGraph(adjacencyMatrixString) {
   for (let i = 0; i < adjacencyMatrix.length; i++) {
     for (let j = i + 1; j < adjacencyMatrix[i].length; j++) {
       if (adjacencyMatrix[i][j] === 1) {
-        console.log(coordinates[i]);
-        console.log(coordinates[j]);
+        // console.log(coordinates[i]);
+        // console.log(coordinates[j]);
         const length = Math.sqrt(Math.pow(coordinates[j][0] - coordinates[i][0], 2) + Math.pow(coordinates[j][1] - coordinates[i][1], 2)).toFixed(1);
         edges.push({ from: i + 1, to: j + 1, label: length, length: length});
       }
@@ -144,6 +149,11 @@ function createGraph(adjacencyMatrixString) {
 
 function colorEdgesBetweenNodes(nodesList, graph) {
   const { nodes, edges } = graph;
+ 
+  edges.forEach((edge) => {
+    edge.color = "#ffffff";
+  });
+
   edges.forEach((edge) => {
     if (nodesList.includes(edge.from) && nodesList.includes(edge.to)) {
       edge.color = "red";
