@@ -85,7 +85,7 @@ function NetworkGraph(props) {
     };
     // console.log(props.path);
     if (props.path !== null) {
-      // console.log(props.path);
+      console.log(props.path);
       modifiedGraphData = colorEdgesBetweenNodes(props.path, modifiedGraphData);
     }
 
@@ -129,7 +129,7 @@ function createGraph(adjacencyMatrixString) {
 
   // Create the nodes for the graph
   const nodes = coordinates.map((coord, index) => {
-    return { id: index + 1, x: coord[0]*10, y: coord[1]*10, label: "Node " + index};
+    return { id: index , x: coord[0]*10, y: coord[1]*10, label: "Node " + index};
   });
 
   // Create the edges for the graph
@@ -140,7 +140,7 @@ function createGraph(adjacencyMatrixString) {
         // console.log(coordinates[i]);
         // console.log(coordinates[j]);
         const length = Math.sqrt(Math.pow(coordinates[j][0] - coordinates[i][0], 2) + Math.pow(coordinates[j][1] - coordinates[i][1], 2)).toFixed(1);
-        edges.push({ from: i + 1, to: j + 1, label: length, length: length});
+        edges.push({ from: i , to: j , label: length, length: length});
       }
     }
   }
@@ -153,8 +153,9 @@ function colorEdgesBetweenNodes(nodesList, graph) {
   edges.forEach((edge) => {
     edge.color = "#ffffff";
   });
-
+  
   edges.forEach((edge) => {
+    console.log(edge);
     if (nodesList.includes(edge.from) && nodesList.includes(edge.to)) {
       edge.color = "red";
     }

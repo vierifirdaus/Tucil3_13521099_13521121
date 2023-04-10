@@ -47,7 +47,7 @@ function UCS(graph, start, finish){
 
     while(!liveNode.isEmpty()){
         const current = liveNode.dequeue()
-        console.log("current",current)
+        // console.log("current",current)
         if(current.element[0] === finish){
             pathTotal = current.element
             break;
@@ -73,7 +73,6 @@ function UCS(graph, start, finish){
 function parserInputUCS(graph){
     const rows = graph.trim().split("\n");
     const matrix = rows.map((row) => row.split(" ").map((val) => parseInt(val)));
-    console.log(matrix)
     return matrix;
 }
 
