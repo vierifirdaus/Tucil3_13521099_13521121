@@ -4,7 +4,7 @@ import Map from "./Map/Map";
 import { useState } from "react";
 import NetworkGraph from "./NetworkGraph/NetworkGraph";
 import {UCS,parserInputUCS} from "./ShortestPath/UCS";
-import {aStar,parserInputA } from "./ShortestPath/Astar";
+import {aStar,parserInputA, distance } from "./ShortestPath/Astar";
 
 function App() {
   const [showMap, setShowMap] = useState(false);
