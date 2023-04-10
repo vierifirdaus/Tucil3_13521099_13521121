@@ -8,42 +8,58 @@ import {aStar,parserInputA, distance } from "./ShortestPath/Astar";
 
 function App() {
   const [showMap, setShowMap] = useState(false);
-  const [path, setPath] = useState([]);
+  const [path, setPath] = useState(null);
   const [fileContent, setFileContent] = useState("");
+  const [startEnd, setStartEnd] = useState([]);
 
   const onSwitchToggleHandle = (value) => {
-    setFileContent("");
     setShowMap(value);
+    resetGraph();
   };
 
   const onReadFileHandler = (value) => {
+    setFileContent("");
     setFileContent(value);
+  };
+
+  const onStartEndNodeClickHanlder = (value) => {
+    setStartEnd(value);
   };
 
   const onSearchPathHandler = (value) => {
     if (!showMap) {
-      const start=1
-      const finish=4
-
-      if(UCS(parserInputUCS(fileContent), start, finish).pathTotal===null){
-        setPath([])
-      }
-      else{
-        setPath(UCS(parserInputUCS(fileContent), start, finish).pathTotal)
-      }
-
+      const start = 0;
+      const finish = 4;
+      setPath(UCS(parserInputUCS(fileContent), start, finish).pathTotal);
+      console,log(UCS(parserInputUCS(fileContent), start, finish).pathTotal);
     } else {
-      const start=3
-      const finish=4
+      const start = 3;
+      const finish = 4;
 
-      if(aStar(parserInputA(fileContent).matrix,parserInputA(fileContent).coordinates,start,finish).pathTotal===null){
-        setPath([])
+      if (
+        aStar(
+          parserInputA(fileContent).matrix,
+          parserInputA(fileContent).coordinates,
+          start,
+          finish
+        ).pathTotal === null
+      ) {
+        setPath([]);
+      } else {
+        setPath(
+          aStar(
+            parserInputA(fileContent).matrix,
+            parserInputA(fileContent).coordinates,
+            start,
+            finish
+          ).pathTotal
+        );
       }
-      else{
-        setPath(aStar(parserInputA(fileContent).matrix,parserInputA(fileContent).coordinates,start,finish).pathTotal)
-      }
-
     }
+  };
+
+  const resetGraph = (value) => {
+    setPath(null);
   };
 
   return (
@@ -58,7 +74,14 @@ function App() {
     >
       <Box position="absolute" left={0} top={0} h="100%" w="100%">
         {showMap && <Map />}
-        {!showMap && <NetworkGraph content={fileContent} path={path} />}
+        {!showMap && (
+          <NetworkGraph
+            content={fileContent}
+            path={path}
+            newGraph={resetGraph}
+            onStartEndNodeClick={onStartEndNodeClickHanlder}
+          />
+        )}
       </Box>
       <Toolbar
         onSwitchToggle={onSwitchToggleHandle}
