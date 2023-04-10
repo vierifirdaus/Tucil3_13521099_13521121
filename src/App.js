@@ -3,7 +3,8 @@ import Toolbar from "./Toolbar/Toolbar";
 import Map from "./Map/Map";
 import { useState } from "react";
 import NetworkGraph from "./NetworkGraph/NetworkGraph";
-import { UCS, parserInput } from "./ShortestPath/UCS";
+import { UCS, parserInputUCS } from "./ShortestPath/UCS";
+import { aStar, parserInputA } from "./ShortestPath/Astar";
 
 function App() {
   const [showMap, setShowMap] = useState(false);
@@ -11,7 +12,7 @@ function App() {
   const [fileContent, setFileContent] = useState("");
   const [startEnd, setStartEnd] = useState([]);
 
-  const onSwitchToggleHandle = (value) => {    
+  const onSwitchToggleHandle = (value) => {
     setShowMap(value);
     resetGraph();
   };
@@ -27,14 +28,39 @@ function App() {
 
   const onSearchPathHandler = (value) => {
     if (!showMap) {
-      setPath(UCS(parserInput(fileContent), startEnd[0], startEnd[1]).pathTotal);
+      const start = 0;
+      const finish = 4;
+      setPath(UCS(parserInputUCS(fileContent), start, finish).pathTotal);
+      console,log(UCS(parserInputUCS(fileContent), start, finish).pathTotal);
     } else {
+      const start = 3;
+      const finish = 4;
+
+      if (
+        aStar(
+          parserInputA(fileContent).matrix,
+          parserInputA(fileContent).coordinates,
+          start,
+          finish
+        ).pathTotal === null
+      ) {
+        setPath([]);
+      } else {
+        setPath(
+          aStar(
+            parserInputA(fileContent).matrix,
+            parserInputA(fileContent).coordinates,
+            start,
+            finish
+          ).pathTotal
+        );
+      }
     }
   };
 
   const resetGraph = (value) => {
     setPath(null);
-  }
+  };
 
   return (
     <Flex
@@ -48,7 +74,14 @@ function App() {
     >
       <Box position="absolute" left={0} top={0} h="100%" w="100%">
         {showMap && <Map />}
-        {!showMap && <NetworkGraph content={fileContent} path={path} newGraph={resetGraph} onStartEndNodeClick={onStartEndNodeClickHanlder}/>}
+        {!showMap && (
+          <NetworkGraph
+            content={fileContent}
+            path={path}
+            newGraph={resetGraph}
+            onStartEndNodeClick={onStartEndNodeClickHanlder}
+          />
+        )}
       </Box>
       <Toolbar
         onSwitchToggle={onSwitchToggleHandle}

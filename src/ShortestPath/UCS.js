@@ -28,15 +28,17 @@ class PriorityQueue{
         return this.elements.length === 0;
     }
 }
-function setStartEnd(start, finish){
-    return [start,finish]
-}
+
 function UCS(graph, start, finish){
     const liveNode = new PriorityQueue()
     
     liveNode.enqueue([start],0)
     let pathTotal=null
 
+    if(start<0 || finish<0 || start>=graph.length || finish>=graph.length){
+        pathTotal=null
+    }
+    
     const weight = new Array(graph.length).fill(Infinity)
     weight[start] = 0
 
@@ -68,15 +70,14 @@ function UCS(graph, start, finish){
     return {pathTotal,weight}
 }
 
-function parserInput(graph){
-    const rows = graph.trim().split("\r\n");
-    // console.log(rows);
+function parserInputUCS(graph){
+    const rows = graph.trim().split("\n");
     const matrix = rows.map((row) => row.split(" ").map((val) => parseInt(val)));
-    console.log(matrix);
+    console.log(matrix)
     return matrix;
 }
 
-export  {UCS,parserInput};
+export  {UCS,parserInputUCS};
 
 const graph1=[
     [0,2,1,0,0],
