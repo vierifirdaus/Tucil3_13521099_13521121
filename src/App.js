@@ -5,6 +5,7 @@ import { useState } from "react";
 import NetworkGraph from "./NetworkGraph/NetworkGraph";
 import {UCS,parserInputUCS} from "./ShortestPath/UCS";
 import {aStar,parserInputA, distance } from "./ShortestPath/Astar";
+import SidebarAlgo from "./Sidebar/SidebarAlgo";
 
 function App() {
   const [showMap, setShowMap] = useState(false);
@@ -87,6 +88,7 @@ function App() {
         onReadFile={onReadFileHandler}
         onSearch={onSearchPathHandler}
       />
+      <SidebarAlgo />
     </Flex>
   );
 }

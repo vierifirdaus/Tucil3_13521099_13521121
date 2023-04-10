@@ -9,7 +9,6 @@ function NetworkGraph(props) {
   const [graphKey, setGraphKey] = useState(uuidv4());
   const [content, setContent] = useState("");
   var returnVal;
-  // console.log(startEndNodes)
   if (props.content === "") {
     returnVal = null;
   } else {
@@ -21,7 +20,6 @@ function NetworkGraph(props) {
     }
     
     const graph = createGraph(props.content);
-    // console.log(graph);
     const options = {
       layout: {
         hierarchical: false,
@@ -69,7 +67,6 @@ function NetworkGraph(props) {
         // end
         color = "#E53E3E";
       }
-      // console.log(color);
       return {
         ...node,
         color: {
@@ -83,9 +80,7 @@ function NetworkGraph(props) {
       ...graph,
       nodes: modifiedNodes,
     };
-    // console.log(props.path);
     if (props.path !== null) {
-      console.log(props.path);
       modifiedGraphData = colorEdgesBetweenNodes(props.path, modifiedGraphData);
     }
 
@@ -111,7 +106,6 @@ function createGraph(adjacencyMatrixString) {
   const asArray = adjacencyMatrixString
     .split("\n")
     .map((row) => row.split(" ").map((val) => parseInt(val)));
-  // console.log(asArray);
 
   var n = -1;
   for (let i = 0; i < asArray.length; i++) {
@@ -119,13 +113,9 @@ function createGraph(adjacencyMatrixString) {
       n = i;
     }
   }
-  // console.log(n);
 
   const adjacencyMatrix = asArray.slice(0, n+1);
   const coordinates = asArray.slice(n+1, asArray.length);
-
-  // console.log(adjacencyMatrix);
-  // console.log(coordinates);
 
   // Create the nodes for the graph
   const nodes = coordinates.map((coord, index) => {
@@ -137,8 +127,6 @@ function createGraph(adjacencyMatrixString) {
   for (let i = 0; i < adjacencyMatrix.length; i++) {
     for (let j = i + 1; j < adjacencyMatrix[i].length; j++) {
       if (adjacencyMatrix[i][j] === 1) {
-        // console.log(coordinates[i]);
-        // console.log(coordinates[j]);
         const length = Math.sqrt(Math.pow(coordinates[j][0] - coordinates[i][0], 2) + Math.pow(coordinates[j][1] - coordinates[i][1], 2)).toFixed(1);
         edges.push({ from: i , to: j , label: length, length: length});
       }
@@ -155,7 +143,6 @@ function colorEdgesBetweenNodes(nodesList, graph) {
   });
   
   edges.forEach((edge) => {
-    console.log(edge);
     if (nodesList.includes(edge.from) && nodesList.includes(edge.to)) {
       edge.color = "red";
     }
