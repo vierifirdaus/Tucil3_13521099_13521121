@@ -3,15 +3,16 @@ import Toolbar from "./Toolbar/Toolbar";
 import Map from "./Map/Map";
 import { useState } from "react";
 import NetworkGraph from "./NetworkGraph/NetworkGraph";
-import {UCS,parserInputUCS} from "./ShortestPath/UCS";
-import {aStar,parserInputA, distance } from "./ShortestPath/Astar";
+import { UCS, parserInputUCS } from "./ShortestPath/UCS";
+import { aStar, parserInputA, distance } from "./ShortestPath/Astar";
 import SidebarAlgo from "./Sidebar/SidebarAlgo";
 
 function App() {
   const [showMap, setShowMap] = useState(false);
   const [path, setPath] = useState(null);
   const [fileContent, setFileContent] = useState("");
-  const [startEnd, setStartEnd] = useState([]);
+  const [startEnd, setStartEnd] = useState([-1, -1]);
+  const [selectedAlgo, setSelectedAlgo] = useState("UCS");
 
   const onSwitchToggleHandle = (value) => {
     setShowMap(value);
@@ -27,39 +28,57 @@ function App() {
     setStartEnd(value);
   };
 
-  const onSearchPathHandler = (value) => {
-    if (!showMap) {
-      const start = 0;
-      const finish = 4;
-      setPath(UCS(parserInputA(fileContent).matrix, start, finish).pathTotal);
-    } else {
-      const start = 3;
-      const finish = 4;
+  const resetGraph = (value) => {
+    setPath(null);
+  };
 
-      if (
-        aStar(
-          parserInputA(fileContent).matrix,
-          parserInputA(fileContent).coordinates,
-          start,
-          finish
-        ).pathTotal === null
-      ) {
-        setPath([]);
+  const handleAlgoChange = (value) => {
+    if (value !== selectedAlgo) {
+      setSelectedAlgo(value);
+    }
+  };
+
+  const onSearchPathHandler = (value) => {
+    if (fileContent == "") {
+      alert("Please input a file map.");
+    } else if (startEnd[0] == -1 || startEnd[1] == -1) {
+      alert("Please select the end and the start by clicking on the node.");
+    } else {
+      if (!showMap) {
+        const parser = parserInputA(fileContent);
+        if (selectedAlgo == "UCS") {
+          setPath(UCS(parser.matrix, startEnd[0], startEnd[1]).pathTotal);
+        } else {
+          setPath(
+            aStar(parser.matrix, parser.coordinates, startEnd[0], startEnd[1])
+              .pathTotal
+          );
+        }
       } else {
-        setPath(
+        const start = 3;
+        const finish = 4;
+
+        if (
           aStar(
             parserInputA(fileContent).matrix,
             parserInputA(fileContent).coordinates,
             start,
             finish
-          ).pathTotal
-        );
+          ).pathTotal === null
+        ) {
+          setPath([]);
+        } else {
+          setPath(
+            aStar(
+              parserInputA(fileContent).matrix,
+              parserInputA(fileContent).coordinates,
+              start,
+              finish
+            ).pathTotal
+          );
+        }
       }
     }
-  };
-
-  const resetGraph = (value) => {
-    setPath(null);
   };
 
   return (
@@ -88,7 +107,12 @@ function App() {
         onReadFile={onReadFileHandler}
         onSearch={onSearchPathHandler}
       />
-      <SidebarAlgo />
+      <SidebarAlgo
+        tabs={["UCS", "A*"]}
+        selected={selectedAlgo}
+        onChange={handleAlgoChange}
+        // ml="auto"
+      />
     </Flex>
   );
 }

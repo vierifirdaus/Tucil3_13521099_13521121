@@ -1,10 +1,8 @@
 import {
   Box,
   Button,
-  ButtonGroup,
   HStack,
   IconButton,
-  Input,
   Text,
   Switch,
   VStack,
@@ -40,7 +38,7 @@ function Toolbar(props) {
   return (
     <Box
       p={4}
-      borderRadius="lg"
+      borderRadius="xl"
       mt={4}
       bgColor="white"
       shadow="base"

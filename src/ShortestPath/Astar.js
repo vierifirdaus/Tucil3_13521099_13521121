@@ -44,10 +44,6 @@ function aStar(graph, point, start, finish){
         pathTotal=null
         return {pathTotal,weight}
     }
-
-    // console.log("livenode")
-    // console.log(liveNode.dequeue())
-
     while(!liveNode.isEmpty()){
         // console.log(liveNode.elements)
         const current = liveNode.dequeue()
@@ -89,8 +85,8 @@ function parserInputA(inputStr) {
         coordinates.push(coord);
     }
     for(let i=0;i<coordinates.length;i++){
-        for(let j=0;j<coordinates[i].length;j++){
-            if(matrix[i][j]!=0){
+        for(let j=0;j<coordinates.length;j++){
+            if(matrix[i][j]===1){
                 matrix[i][j] = distance(coordinates[i],coordinates[j])
             }
         }
@@ -100,26 +96,26 @@ function parserInputA(inputStr) {
 export {aStar, parserInputA, distance};
 
 // console.log(aStar([[0, 0, 0, 1, 0, 0, 0, 0, 1], [0, 0, 0, 0, 0, 1, 0, 1, 0], [0, 0, 0, 1, 1, 0, 0, 0, 0], [1, 0, 1, 0, 0, 0, 0, 0, 0], [0, 0, 1, 0, 0, 0, 0, 0, 1], [0, 1, 0, 0, 0, 1, 1, 0, 1], [0, 0, 0, 0, 0, 1, 0, 1, 0], [0, 1, 1, 1, 0, 0, 1, 0, 0], [1, 0, 0, 0, 1, 1, 0, 0, 0]], [[3, 4], [2, 3], [0, 0], [0, 4], [0.5, 0], [3, 3], [3, 2], [1, 1], [6, 4]], 2, 8))
-// const graph1=[
-//     [0,0,0,1,0,0,0,0,1], //a 0
-//     [0,0,0,0,0,1,0,1,0], //b 1
-//     [0,0,0,1,1,0,0,0,0], //c 2
-//     [1,0,1,0,0,0,0,0,0], //d 3
-//     [0,0,1,0,0,0,0,0,1], //e 4
-//     [0,1,0,0,0,1,1,0,1], //f 5
-//     [0,0,0,0,0,1,0,1,0], //g 6
-//     [0,1,1,1,0,0,1,0,0], //h 7
-//     [1,0,0,0,1,1,0,0,0]  //i 8
-// ]
-// const point1 =[[3,4],[2,3],[0,0],[0,4],[3,0],[3,3],[3,2],[1,1],[6,4]]
-// for(let i=0;i<9;i++){
-//     for(let j=0;j<9;j++){
-//         if(graph1[i][j]!==0){
-//             graph1[i][j] = distance(point1[i],point1[j])
-//         }
-//     }
-// }
-// // console.log(distance(point1[0],point1[1]))
-// // console.log(graph1)
+const graph1=[
+    [0,0,0,1,0,0,0,0,1],
+[0,0,0,0,0,1,0,1,0],
+[0,0,0,1,1,0,0,1,0],
+[1,0,1,0,0,0,0,1,0],
+[0,0,1,0,0,0,0,0,1],
+[0,1,0,0,0,1,1,0,1],
+[0,0,0,0,0,1,0,1,0],
+[0,1,1,1,0,0,1,0,0],
+[1,0,0,0,1,1,0,0,0] //i 8
+]
+const point1 =[[30,40],[15,3],[0,0],[0,40],[30,0],[30,30],[30,20],[10,10],[60,40]]
+for(let i=0;i<9;i++){
+    for(let j=0;j<9;j++){
+        if(graph1[i][j]!==0){
+            graph1[i][j] = distance(point1[i],point1[j])
+        }
+    }
+}
+// console.log(distance(point1[0],point1[1]))
+// console.log(graph1)
 // console.log("pathtotal",aStar(graph1,point1,2,8).pathTotal)
 // console.log("weight",aStar(graph1,point1,2,8).weight)
