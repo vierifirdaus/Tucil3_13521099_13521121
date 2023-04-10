@@ -30,8 +30,9 @@ function App() {
     if (!showMap) {
       const start = 0;
       const finish = 4;
-      setPath(UCS(parserInputUCS(fileContent), start, finish).pathTotal);
-      console,log(UCS(parserInputUCS(fileContent), start, finish).pathTotal);
+      // console.log(parserInputA(fileContent).matrix);
+      // console.log(UCS(parserInputA(fileContent).matrix, start, finish).pathTotal)
+      setPath(UCS(parserInputA(fileContent).matrix, start, finish).pathTotal);
     } else {
       const start = 3;
       const finish = 4;
