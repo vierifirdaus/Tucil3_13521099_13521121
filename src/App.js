@@ -48,14 +48,13 @@ function App() {
     } else if (startEnd[0] == -1 || startEnd[1] == -1) {
       alert("Please select the starting and ending nodes by clicking on the desired node.");
     } else {
-      let keterangan=true // jika pake input manual true, jika pake peta false 
       let res;
       if (selectedAlgo == "UCS") {
-        const parser = parserInputA(fileContent,keterangan);
+        const parser = parserInputA(fileContent,!showMap);
         res = UCS(parser.matrix, startEnd[0], startEnd[1]);
       } else {
-        const parser = parserInputA(fileContent,keterangan);
-        res = aStar(parser, startEnd[0], startEnd[1],keterangan);
+        const parser = parserInputA(fileContent,!showMap);
+        res = aStar(parser, startEnd[0], startEnd[1],!showMap);
       }
       console.log(res.distanceMinimum.toFixed(1));
       setPath(res.pathTotal);
