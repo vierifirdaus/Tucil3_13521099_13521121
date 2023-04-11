@@ -66,8 +66,10 @@ function UCS(graph, start, finish){
         }
     }   
 
+
+    let distanceMinimum=weight[finish]
             
-    return {pathTotal,weight}
+    return {pathTotal,distanceMinimum}
 }
 
 function parserInputUCS(graph){

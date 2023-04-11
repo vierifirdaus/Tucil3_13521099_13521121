@@ -29,11 +29,31 @@ class PriorityQueue{
     }
 }
 
-function distance(a,b){
-    return Math.sqrt((a[0]-b[0])**2 + (a[1]-b[1])**2)
+function distance(a,b,keterangan){
+
+    // map biasa
+    if(keterangan){
+        return Math.sqrt((a[0]-b[0])**2 + (a[1]-b[1])**2)
+    }
+    // map peta
+    else{
+        return distance_map(a[0],a[1],b[0],b[1])
+    }
 }
 
-function aStar(fullGraph, start, finish){
+function distance_map(lat1, lon1, lat2, lon2) {
+    const R = 6371000; // approximate radius of Earth in meters
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+              Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = R * c;
+    return distance;
+  }
+
+function aStar(fullGraph, start, finish, keterangan){
     let graph = fullGraph.matrix;
     let point = fullGraph.coordinates;
     const liveNode = new PriorityQueue()
@@ -59,7 +79,7 @@ function aStar(fullGraph, start, finish){
                 const newDistance = weight[current.element[0]] + graph[current.element[0]][i]
                 // console.log(current.element[0],i) 
                 if(newDistance < weight[i]){
-                    const straightLineDistance = distance(point[i],point[finish])
+                    const straightLineDistance = distance(point[i],point[finish],keterangan)
                     const totalDistance= newDistance + straightLineDistance
                     weight[i] = newDistance
                     const newNode= [i].concat(current.element)
@@ -69,10 +89,10 @@ function aStar(fullGraph, start, finish){
         }
     }   
 
-            
-    return {pathTotal,weight}
+    let distanceMinimum=weight[finish]
+    return {pathTotal,distanceMinimum}
 }
-function parserInputA(inputStr) {
+function parserInputA(inputStr,keterangan) {
     const lines = inputStr.trim().split('\n');
     const matrix = [];
 
@@ -89,7 +109,7 @@ function parserInputA(inputStr) {
     for(let i=0;i<coordinates.length;i++){
         for(let j=0;j<coordinates.length;j++){
             if(matrix[i][j]===1){
-                matrix[i][j] = distance(coordinates[i],coordinates[j])
+                matrix[i][j] = distance(coordinates[i],coordinates[j],keterangan)
             }
         }
     }

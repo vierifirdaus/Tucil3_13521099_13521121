@@ -45,16 +45,18 @@ function App() {
     } else if (startEnd[0] == -1 || startEnd[1] == -1) {
       alert("Please select the end and the start by clicking on the node.");
     } else {
-      const parser = parserInputA(fileContent);
+      let keterangan=true // jika pake input manual true, jika pake peta false 
       let res;
       if (selectedAlgo == "UCS") {
+        const parser = parserInputA(fileContent,keterangan);
         res = UCS(parser.matrix, startEnd[0], startEnd[1]);
       } else {
-        res = aStar(parser, startEnd[0], startEnd[1]);
+        const parser = parserInputA(fileContent,keterangan);
+        res = aStar(parser, startEnd[0], startEnd[1],keterangan);
       }
-      console.log(res.weight[startEnd[1]].toFixed(1));
+      console.log(res.distanceMinimum.toFixed(1));
       setPath(res.pathTotal);
-      setDistance(res.weight[startEnd[1]].toFixed(1));
+      setDistance(res.distanceMinimum.toFixed(1));
     }
   };
 
