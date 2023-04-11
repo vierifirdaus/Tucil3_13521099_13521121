@@ -126,8 +126,8 @@ function createGraph(adjacencyMatrixString) {
   const adjacencyMatrix = asArray.slice(0, n + 1);
   const coordinates = asArray.slice(n + 1, asArray.length);
 
-  console.log(adjacencyMatrix);
-  console.log(coordinates);
+  // console.log(adjacencyMatrix);
+  // console.log(coordinates);
 
   // Create the nodes for the graph
   const nodes = coordinates.map((coord, index) => {

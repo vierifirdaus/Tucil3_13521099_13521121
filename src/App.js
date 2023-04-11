@@ -45,41 +45,16 @@ function App() {
     } else if (startEnd[0] == -1 || startEnd[1] == -1) {
       alert("Please select the end and the start by clicking on the node.");
     } else {
-      if (!showMap) {
-        const parser = parserInputA(fileContent);
-        let res;
-        if (selectedAlgo == "UCS") {
-          res = UCS(parser.matrix, startEnd[0], startEnd[1]); 
-        } else {
-          res = aStar(parser, startEnd[0], startEnd[1]);
-        }
-        setPath(res.pathTotal);
-        setDistance(res.weight[startEnd[1]]);
-
+      const parser = parserInputA(fileContent);
+      let res;
+      if (selectedAlgo == "UCS") {
+        res = UCS(parser.matrix, startEnd[0], startEnd[1]);
       } else {
-        const start = 3;
-        const finish = 4;
-
-        if (
-          aStar(
-            parserInputA(fileContent).matrix,
-            parserInputA(fileContent).coordinates,
-            start,
-            finish
-          ).pathTotal === null
-        ) {
-          setPath([]);
-        } else {
-          setPath(
-            aStar(
-              parserInputA(fileContent).matrix,
-              parserInputA(fileContent).coordinates,
-              start,
-              finish
-            ).pathTotal
-          );
-        }
+        res = aStar(parser, startEnd[0], startEnd[1]);
       }
+      console.log(res.weight[startEnd[1]].toFixed(1));
+      setPath(res.pathTotal);
+      setDistance(res.weight[startEnd[1]].toFixed(1));
     }
   };
 
@@ -94,7 +69,12 @@ function App() {
       bgColor={"gray.800"}
     >
       <Box position="absolute" left={0} top={0} h="100%" w="100%">
-        {showMap && <Map content={fileContent} />}
+        {showMap && (
+          <Map
+            content={fileContent}
+            onStartEndNodeClick={onStartEndNodeClickHanlder}
+          />
+        )}
         {!showMap && (
           <NetworkGraph
             content={fileContent}
