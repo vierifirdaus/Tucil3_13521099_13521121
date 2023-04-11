@@ -37,7 +37,7 @@ function SidebarAlgo({ tabs, selected, onChange }) {
                   color: selected === tab ? "white" : "gray.500",
                   fontWeight: selected === tab ? "bold" : "normal",
                   bg: selected === tab ? "teal.500" : "white",
-                  w: "45px",
+                  w: "55px",
                   h: "160px",
                 }}
               >
@@ -57,11 +57,11 @@ function SidebarAlgo({ tabs, selected, onChange }) {
                 // bg="black"
                 // color="white"                
                 fontWeight="bold"
-                w="45px"
+                w="55px"
                 h="60px"
                 borderBottom="5px solid black"
               >
-                {tab !== 0 && tab}
+                {tab}
               </Tab>
             );
           }

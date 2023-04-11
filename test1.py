@@ -12,4 +12,4 @@ G_undirected = ox.utils_graph.get_undirected(G)
 # # save the graph in GraphML format
 # G_edges.key = range(G_edges.shape[0])
 # H = ox.gdfs_to_graph(gdf_edges=G_edges, gdf_nodes=G_nodes)
-ox.save_graphml(G_undirected, "dago.graphml", gephi=True)
+ox.save_graphml(G_undirected, "dago.graphml")

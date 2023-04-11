@@ -6,6 +6,7 @@ import NetworkGraph from "./NetworkGraph/NetworkGraph";
 import { UCS, parserInputUCS } from "./ShortestPath/UCS";
 import { aStar, parserInputA, distance } from "./ShortestPath/Astar";
 import SidebarAlgo from "./Sidebar/SidebarAlgo";
+import PopoverHelp from "./PopoverHelp/PopoverHelp";
 
 function App() {
   const [showMap, setShowMap] = useState(false);
@@ -31,6 +32,8 @@ function App() {
 
   const resetGraph = (value) => {
     setPath(null);
+    setDistance(0);
+    setStartEnd([-1, -1]);
   };
 
   const handleAlgoChange = (value) => {
@@ -41,9 +44,9 @@ function App() {
 
   const onSearchPathHandler = (value) => {
     if (fileContent == "") {
-      alert("Please input a file map.");
+      alert("Please input a map file.");
     } else if (startEnd[0] == -1 || startEnd[1] == -1) {
-      alert("Please select the end and the start by clicking on the node.");
+      alert("Please select the starting and ending nodes by clicking on the desired node.");
     } else {
       const parser = parserInputA(fileContent);
       let res;
@@ -95,6 +98,7 @@ function App() {
         onChange={handleAlgoChange}
         // ml="auto"
       />
+      <PopoverHelp />
     </Flex>
   );
 }
