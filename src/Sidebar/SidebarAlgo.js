@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Tabs, TabList, Tab } from "@chakra-ui/react";
 
 function SidebarAlgo({ tabs, selected, onChange }) {
@@ -13,9 +12,7 @@ function SidebarAlgo({ tabs, selected, onChange }) {
       }
         
       zIndex="modal"
-      ml="auto"
-      mt="auto"
-      mb="auto"
+
     >
       <TabList
         sx={{
@@ -27,7 +24,6 @@ function SidebarAlgo({ tabs, selected, onChange }) {
         }}
       >
         {tabs.map((tab) => {
-          console.log(tab);
           if (tab === "UCS" || tab === "A*") {
             return (
               <Tab

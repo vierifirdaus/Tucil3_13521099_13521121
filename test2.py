@@ -25,4 +25,4 @@ def convert_graphml_to_txt(graphml_file, txt_file):
               y = G.nodes[node]['y']
               f.write(f"\n{y} {x}")
 
-convert_graphml_to_txt('san_francisco_drive.graphml', 'output.txt')
+convert_graphml_to_txt('kelapa gading.graphml', 'kelapa gading.txt')

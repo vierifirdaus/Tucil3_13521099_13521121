@@ -1,4 +1,4 @@
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Flex, HStack, Spacer } from "@chakra-ui/react";
 import Toolbar from "./Toolbar/Toolbar";
 import Map from "./Map/Map";
 import { useState } from "react";
@@ -7,10 +7,11 @@ import { UCS, parserInputUCS } from "./ShortestPath/UCS";
 import { aStar, parserInputA, distance } from "./ShortestPath/Astar";
 import SidebarAlgo from "./Sidebar/SidebarAlgo";
 import PopoverHelp from "./PopoverHelp/PopoverHelp";
+import SidebarMap from "./Sidebar/SidebarMap";
 
 function App() {
   const [showMap, setShowMap] = useState(false);
-  const [path, setPath] = useState(null);
+  const [path, setPath] = useState([]);
   const [distance, setDistance] = useState(0);
   const [fileContent, setFileContent] = useState("");
   const [startEnd, setStartEnd] = useState([-1, -1]);
@@ -31,7 +32,7 @@ function App() {
   };
 
   const resetGraph = (value) => {
-    setPath(null);
+    setPath([]);
     setDistance(0);
     setStartEnd([-1, -1]);
   };
@@ -46,17 +47,18 @@ function App() {
     if (fileContent == "") {
       alert("Please input a map file.");
     } else if (startEnd[0] == -1 || startEnd[1] == -1) {
-      alert("Please select the starting and ending nodes by clicking on the desired node.");
+      alert(
+        "Please select the starting and ending nodes by clicking on the desired node."
+      );
     } else {
       let res;
       if (selectedAlgo == "UCS") {
-        const parser = parserInputA(fileContent,!showMap);
+        const parser = parserInputA(fileContent, !showMap);
         res = UCS(parser.matrix, startEnd[0], startEnd[1]);
       } else {
-        const parser = parserInputA(fileContent,!showMap);
-        res = aStar(parser, startEnd[0], startEnd[1],!showMap);
+        const parser = parserInputA(fileContent, !showMap);
+        res = aStar(parser, startEnd[0], startEnd[1], !showMap);
       }
-      console.log(res.distanceMinimum.toFixed(1));
       setPath(res.pathTotal);
       setDistance(res.distanceMinimum.toFixed(1));
     }
@@ -66,7 +68,6 @@ function App() {
     <Flex
       position="relative"
       flexDirection="column"
-      alignItems="center"
       bgPos="bottom"
       h="100vh"
       w="100vw"
@@ -77,6 +78,7 @@ function App() {
           <Map
             content={fileContent}
             onStartEndNodeClick={onStartEndNodeClickHanlder}
+            path={path}
           />
         )}
         {!showMap && (
@@ -93,13 +95,16 @@ function App() {
         onReadFile={onReadFileHandler}
         onSearch={onSearchPathHandler}
       />
-      <SidebarAlgo
-        tabs={[distance, "UCS", "A*"]}
-        selected={selectedAlgo}
-        onChange={handleAlgoChange}
-        // ml="auto"
-      />
-      <PopoverHelp />
+      <Flex direction="row" mt="auto" mb="auto" alignItems='center'>
+        {showMap && <SidebarMap tabs={["Dago", "Buah Batu", "Jakarta Timur"]} />}
+        <Spacer />
+        <SidebarAlgo
+          tabs={[distance, "UCS", "A*"]}
+          selected={selectedAlgo}
+          onChange={handleAlgoChange}
+        />
+      </Flex>
+      <PopoverHelp map={showMap}/>
     </Flex>
   );
 }

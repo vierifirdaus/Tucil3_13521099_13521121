@@ -1,18 +1,20 @@
-import { Skeleton } from "@chakra-ui/react";
+import { Skeleton, Text, border } from "@chakra-ui/react";
 import {
   GoogleMap,
+  InfoBox,
   Marker,
   Polyline,
   useJsApiLoader,
-  Circle,
 } from "@react-google-maps/api";
 import { useState } from "react";
+import { distance_map } from "../ShortestPath/Astar";
 
 function Map(props) {
   const [center, setCenter] = useState({ lat: -6.8911125, lng: 107.6101353 });
   const [graph, setGraph] = useState({ nodes: [], edges: [] });
   const [content, setContent] = useState("");
   const [startEndNodes, setStartEndNodes] = useState([-1, -1]);
+  const [showEdgeLabel, setShowEdgeLabel] = useState(true);
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API,
   });
@@ -35,12 +37,6 @@ function Map(props) {
     height: "100%",
   };
 
-  const polylineOptions = {
-    strokeColor: "#FFFFFF",
-    strokeOpacity: 1,
-    strokeWeight: 3,
-  };
-
   const markerClickHandler = (value) => {
     const clickedNodeId = value;
     if (startEndNodes[0] === clickedNodeId) {
@@ -58,15 +54,32 @@ function Map(props) {
     }
   };
 
+  const polylineOptions = (arr, edgeid) => {
+    let color = "#FFFFFF";
+
+    for (let i = 0; i < arr.length - 1; i++) {
+      if (
+        `${arr[i]}-${arr[i + 1]}` === edgeid ||
+        `${arr[i + 1]}-${arr[i]}` === edgeid
+      ) {
+        color = "red";
+      }
+    }
+
+    return {
+      strokeColor: color,
+      strokeOpacity: 1,
+      strokeWeight: 3,
+    };
+  };
+
   const fillColor = (arr, markerid) => {
     let color = "#319795";
-
     if (arr[0] === markerid) {
       color = "red";
     } else if (arr[1] === markerid) {
       color = "green";
     }
-
     return {
       path: window.google.maps.SymbolPath.CIRCLE,
       fillColor: color,
@@ -79,6 +92,7 @@ function Map(props) {
 
   if (content !== props.content) {
     setContent(props.content);
+    setStartEndNodes([-1, -1]);
 
     const graphData = props.content.split("\n");
     const graphMatrix = graphData.map((row) =>
@@ -141,8 +155,38 @@ function Map(props) {
             { lat: edge.start.latitude, lng: edge.start.longitude },
             { lat: edge.end.latitude, lng: edge.end.longitude },
           ]}
-          options={polylineOptions}
+          options={polylineOptions(props.path, edge.id)}
         />
+      ))}
+
+      {graph.edges.map((edge) => (
+        <InfoBox
+          key={edge.id + "-len"}
+          position={{
+            lat: (edge.start.latitude + edge.end.latitude) / 2,
+            lng: (edge.start.longitude + edge.end.longitude) / 2,
+          }}
+          options={{
+            isHidden: showEdgeLabel,
+            disableAutoPan : true,
+            boxStyle: {
+              width: "90px",
+              padding: "10px",
+              "border-radius": "40px"
+            },
+          }}
+        >
+          <Text bg="white" p="5px">
+            {(
+              distance_map(
+                edge.start.latitude,
+                edge.start.longitude,
+                edge.end.latitude,
+                edge.end.longitude
+              ) * 1000
+            ).toFixed(1)}
+          </Text>
+        </InfoBox>
       ))}
     </GoogleMap>
   );

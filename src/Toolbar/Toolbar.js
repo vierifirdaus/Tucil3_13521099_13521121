@@ -44,6 +44,9 @@ function Toolbar(props) {
       shadow="base"
       minW="container.md"
       zIndex="modal"
+      maxW="230px"
+      ml="auto"
+      mr="auto"
     >
       <HStack spacing={4}>
         <Switch

@@ -50,7 +50,7 @@ function distance_map(lat1, lon1, lat2, lon2) {
               Math.sin(dLon / 2) * Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     const distance = R * c;
-    return distance;
+    return distance/1000;
   }
 
 function aStar(fullGraph, start, finish, keterangan){
@@ -115,7 +115,7 @@ function parserInputA(inputStr,keterangan) {
     }
     return {matrix, coordinates};
 }
-export {aStar, parserInputA, distance};
+export {aStar, parserInputA, distance, distance_map};
 
 // console.log(aStar([[0, 0, 0, 1, 0, 0, 0, 0, 1], [0, 0, 0, 0, 0, 1, 0, 1, 0], [0, 0, 0, 1, 1, 0, 0, 0, 0], [1, 0, 1, 0, 0, 0, 0, 0, 0], [0, 0, 1, 0, 0, 0, 0, 0, 1], [0, 1, 0, 0, 0, 1, 1, 0, 1], [0, 0, 0, 0, 0, 1, 0, 1, 0], [0, 1, 1, 1, 0, 0, 1, 0, 0], [1, 0, 0, 0, 1, 1, 0, 0, 0]], [[3, 4], [2, 3], [0, 0], [0, 4], [0.5, 0], [3, 3], [3, 2], [1, 1], [6, 4]], 2, 8))
 const graph1=[

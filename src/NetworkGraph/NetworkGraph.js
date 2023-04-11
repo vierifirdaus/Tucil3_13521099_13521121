@@ -89,7 +89,7 @@ function NetworkGraph(props) {
       ...graph,
       nodes: modifiedNodes,
     };
-    if (props.path !== null) {
+    if (props.path !== []) {
       modifiedGraphData = colorEdgesBetweenNodes(props.path, modifiedGraphData);
     }
 
