@@ -17,11 +17,11 @@ function App() {
 
   const onSwitchToggleHandle = (value) => {
     setShowMap(value);
+    setFileContent("");
     resetGraph();
   };
 
   const onReadFileHandler = (value) => {
-    setFileContent("");
     setFileContent(value);
   };
 
@@ -54,7 +54,7 @@ function App() {
           res = aStar(parser, startEnd[0], startEnd[1]);
         }
         setPath(res.pathTotal);
-        setDistance(res.weight);
+        setDistance(res.weight[startEnd[1]]);
 
       } else {
         const start = 3;
@@ -94,7 +94,7 @@ function App() {
       bgColor={"gray.800"}
     >
       <Box position="absolute" left={0} top={0} h="100%" w="100%">
-        {showMap && <Map />}
+        {showMap && <Map content={fileContent} />}
         {!showMap && (
           <NetworkGraph
             content={fileContent}

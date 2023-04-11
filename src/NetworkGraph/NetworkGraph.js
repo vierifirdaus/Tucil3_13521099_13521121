@@ -114,7 +114,7 @@ function createGraph(adjacencyMatrixString) {
   // rekomendasi jarak antar node adalah > 10 supaya tidak terlihat terlalu dempet
   const asArray = adjacencyMatrixString
     .split("\n")
-    .map((row) => row.split(" ").map((val) => parseInt(val)));
+    .map((row) => row.split(" ").map((val) => parseFloat(val)));
 
   var n = -1;
   for (let i = 0; i < asArray.length; i++) {
@@ -125,6 +125,9 @@ function createGraph(adjacencyMatrixString) {
 
   const adjacencyMatrix = asArray.slice(0, n + 1);
   const coordinates = asArray.slice(n + 1, asArray.length);
+
+  console.log(adjacencyMatrix);
+  console.log(coordinates);
 
   // Create the nodes for the graph
   const nodes = coordinates.map((coord, index) => {
