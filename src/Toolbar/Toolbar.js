@@ -28,7 +28,6 @@ function Toolbar(props) {
       reader.onload = function (event) {
         const contents = event.target.result;
         props.onReadFile(contents);
-        console.log(contents);
       };
 
       reader.readAsText(file);
@@ -41,9 +40,9 @@ function Toolbar(props) {
       <HStack
         flexBasis={{base: "90%", sm: "85%", md: "70%", lg: "70%"}}
         maxW="container.md"
-        spacing={4}
+        spacing={[1,4]}
         w="container.sm"
-        p={4}
+        p={[4]}
         borderRadius="xl"
         bgColor="white"
         shadow="base"
@@ -66,7 +65,7 @@ function Toolbar(props) {
           </Text>
         </VStack>
         <Spacer />
-        <Button colorScheme="teal" onClick={openFileDialog}>
+        <Button colorScheme="teal" onClick={openFileDialog}  >
           Choose File
         </Button>
         <IconButton

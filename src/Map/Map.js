@@ -16,7 +16,7 @@ function Map(props) {
   const [startEndNodes, setStartEndNodes] = useState([-1, -1]);
   const [showEdgeLabel, setShowEdgeLabel] = useState(true);
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API,
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API_KEY,
   });
 
   if (!isLoaded) {

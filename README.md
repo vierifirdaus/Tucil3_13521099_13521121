@@ -27,7 +27,16 @@ Program sederhana untuk menentukan lintasan terpendek berdasarkan peta Google Ma
 | Vieri Fajar Firdaus         | 13521099 | 13521099@std.stei.itb.ac.id |
 | Saddam Annais Shaquille     | 13521121 | 13521121@std.stei.itb.ac.id |
 
-<a name="technologies-used"></a>
+<a name="features"></a>
+
+## Features
+- Program dapat menerima input file config ber-ekstensi `txt` dengan ketentuan sebagai <a href=""> berikut</a>
+- Menampilkan `peta` untuk visualisasi rute
+- Menampilkan `edge` untuk tiap instansiasi jalan pada peta
+- Pengguna dapat memilih `algoritma` yang akan digunakan serta `view` yang akan ditampilkan pada peta
+- Pengguna juga dapat memilih `titik awal` dan `titik akhir` yang akan digunakan
+- `Jarak lintasan terpendek` akan ditampilkan pada bagian bawah peta
+- Pewarnaan `rute` berbeda tergantung jalur yang dilalui oleh algoritma UCS dan A*
 
 <a name="usage"></a>
 
@@ -78,7 +87,7 @@ Program sederhana untuk menentukan lintasan terpendek berdasarkan peta Google Ma
 
 ## Contact
 <h4 align="center">
-  Contact Me : vieryfirdaus@gmail.com<br/>
+  Contact Us : Vieri & Saddam<br/>
   2023.
 </h4>
 <hr>
