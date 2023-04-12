@@ -85,9 +85,9 @@ function App() {
         const parser = parserInputA(fileContent, !showMap);
         res = aStar(parser, startEnd[0], startEnd[1], !showMap);
       }
-      console.log(startEnd[1], startEnd[0])
+      // console.log(startEnd[1], startEnd[0])
+      // console.log(res.pathTotal)
       console.log(res.pathTotal)
-      
       setPath(res.pathTotal);
       setDistance(res.distanceMinimum.toFixed(1));
     }
