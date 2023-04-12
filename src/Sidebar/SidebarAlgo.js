@@ -1,18 +1,28 @@
-import { Tabs, TabList, Tab } from "@chakra-ui/react";
+import {
+  Tabs,
+  TabList,
+  Tab,
+  Switch,
+  VStack,
+  Text,
+  Spacer,
+} from "@chakra-ui/react";
 
-function SidebarAlgo({ tabs, selected, onChange }) {
+function SidebarAlgo(props) {
+  const handleSwitchToggle = (event) => {
+    props.onShowLabel(event.target.checked);
+  }
+
   return (
     <Tabs
       orientation="vertical"
       isLazy
       onChange={(index) => {
         if (index !== 0) {
-          onChange(tabs[index])}
+          props.onChange(props.tabs[index]);
         }
-      }
-        
+      }}
       zIndex="modal"
-
     >
       <TabList
         sx={{
@@ -23,16 +33,29 @@ function SidebarAlgo({ tabs, selected, onChange }) {
           border: "none",
         }}
       >
-        {tabs.map((tab) => {
+        <VStack
+          w="55px"
+          h="80px"
+          bgColor="white"
+          borderBottom="5px solid black"
+        >
+          <Spacer />
+          <Text fontSize="xs" m="0" fontWeight="medium" textAlign="center">
+            Label
+          </Text>
+          <Switch size="md" colorScheme="teal" isChecked={props.showLabel} onChange={handleSwitchToggle}/>
+          <Spacer />
+        </VStack>
+        {props.tabs.map((tab) => {
           if (tab === "UCS" || tab === "A*") {
             return (
               <Tab
                 key={tab}
                 _selected={{ bg: "teal.500", color: "white" }}
                 sx={{
-                  color: selected === tab ? "white" : "gray.500",
-                  fontWeight: selected === tab ? "bold" : "normal",
-                  bg: selected === tab ? "teal.500" : "white",
+                  color: props.selected === tab ? "white" : "gray.500",
+                  fontWeight: props.selected === tab ? "bold" : "normal",
+                  bg: props.selected === tab ? "teal.500" : "white",
                   w: "55px",
                   h: "160px",
                 }}
@@ -51,10 +74,10 @@ function SidebarAlgo({ tabs, selected, onChange }) {
                 bg="white"
                 color="teal.500"
                 // bg="black"
-                // color="white"                
+                // color="white"
                 fontWeight="bold"
                 w="55px"
-                h="60px"
+                h="80px"
                 borderBottom="5px solid black"
               >
                 {tab}

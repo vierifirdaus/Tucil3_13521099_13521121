@@ -76,9 +76,9 @@ function Map(props) {
   const fillColor = (arr, markerid) => {
     let color = "#319795";
     if (arr[0] === markerid) {
-      color = "red";
+      color = "#D53F8C";
     } else if (arr[1] === markerid) {
-      color = "green";
+      color = "#C53030";
     }
     return {
       path: window.google.maps.SymbolPath.CIRCLE,
@@ -143,6 +143,8 @@ function Map(props) {
       {graph.nodes.map((node) => (
         <Marker
           key={node.id}
+          // label={node.id.toString()}
+          // opacity="1"
           position={{ lat: node.latitude, lng: node.longitude }}
           icon={fillColor(startEndNodes, node.id)}
           onClick={() => markerClickHandler(node.id)}
@@ -167,16 +169,18 @@ function Map(props) {
             lng: (edge.start.longitude + edge.end.longitude) / 2,
           }}
           options={{
-            isHidden: showEdgeLabel,
+            isHidden: !props.showLabel,
             disableAutoPan : true,
+            closeBoxURL: " ",
             boxStyle: {
-              width: "90px",
-              padding: "10px",
-              "border-radius": "40px"
+              width: "50px",              
+              // padding: "5px",
+              "border-radius": "20px",
+              "backgorund-color": "white",
             },
           }}
         >
-          <Text bg="white" p="5px">
+          <Text bg="white" p="5px" fontWeight="medium" textAlign="right">
             {(
               distance_map(
                 edge.start.latitude,

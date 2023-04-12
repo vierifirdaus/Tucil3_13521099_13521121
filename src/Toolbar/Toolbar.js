@@ -13,8 +13,7 @@ import { FaLocationArrow, FaTimes } from "react-icons/fa";
 
 function Toolbar(props) {
   const handleSwitchToggle = (event) => {
-    const newSwitchValue = event.target.checked;
-    props.onSwitchToggle(newSwitchValue);
+    props.onSwitchToggle(event.target.checked);
   };
 
   function openFileDialog() {

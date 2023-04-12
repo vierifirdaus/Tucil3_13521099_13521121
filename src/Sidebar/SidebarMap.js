@@ -6,11 +6,10 @@ function SidebarMap({ tabs, selected, onChange }) {
       orientation="vertical"
       isLazy
       onChange={(index) => {
-        if (index !== 0) {
-          onChange(tabs[index]);
-        }
+        onChange(tabs[index]);
       }}
       zIndex="modal"
+      index = {selected}
     >
       <TabList
         sx={{

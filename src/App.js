@@ -8,6 +8,10 @@ import { aStar, parserInputA, distance } from "./ShortestPath/Astar";
 import SidebarAlgo from "./Sidebar/SidebarAlgo";
 import PopoverHelp from "./PopoverHelp/PopoverHelp";
 import SidebarMap from "./Sidebar/SidebarMap";
+import { useEffect } from "react";
+import mapItb from './Asset/ITB.txt';
+import mapBuahbatu from './Asset/buahbatu.txt';
+import mapPerumahan from './Asset/perumahan.txt';
 
 function App() {
   const [showMap, setShowMap] = useState(false);
@@ -16,14 +20,24 @@ function App() {
   const [fileContent, setFileContent] = useState("");
   const [startEnd, setStartEnd] = useState([-1, -1]);
   const [selectedAlgo, setSelectedAlgo] = useState("UCS");
+  const [showLabel, setShowLabel] = useState(true);
+  const [selectedMap, setSelectedMap] = useState("");
 
   const onSwitchToggleHandle = (value) => {
     setShowMap(value);
     setFileContent("");
+    setSelectedMap("");
     resetGraph();
   };
 
+  const onSwitchLabel = (value) => {
+    setShowLabel(value);
+  };
+
   const onReadFileHandler = (value) => {
+    console.log("test")
+    setSelectedMap("");
+    resetGraph();
     setFileContent(value);
   };
 
@@ -32,6 +46,7 @@ function App() {
   };
 
   const resetGraph = (value) => {
+    setShowLabel(true);
     setPath([]);
     setDistance(0);
     setStartEnd([-1, -1]);
@@ -40,6 +55,16 @@ function App() {
   const handleAlgoChange = (value) => {
     if (value !== selectedAlgo) {
       setSelectedAlgo(value);
+    }
+  };
+
+  const handleMapChange = (value) => {
+        // console.log('value')
+    if (value !== selectedMap) {
+      setSelectedMap(value);
+      if (value === "ITB") setFileContent(mapItb);
+      else if (value === "Buah Batu") setFileContent(mapBuahbatu);
+      else if (value === "Peru- mahan") setFileContent(mapPerumahan);
     }
   };
 
@@ -79,6 +104,7 @@ function App() {
             content={fileContent}
             onStartEndNodeClick={onStartEndNodeClickHanlder}
             path={path}
+            showLabel={showLabel}
           />
         )}
         {!showMap && (
@@ -87,6 +113,7 @@ function App() {
             path={path}
             newGraph={resetGraph}
             onStartEndNodeClick={onStartEndNodeClickHanlder}
+            showLabel={showLabel}
           />
         )}
       </Box>
@@ -95,18 +122,27 @@ function App() {
         onReadFile={onReadFileHandler}
         onSearch={onSearchPathHandler}
       />
-      <Flex direction="row" mt="auto" mb="auto" alignItems='center'>
-        {showMap && <SidebarMap tabs={["Dago", "Buah Batu", "Jakarta Timur"]} />}
+      <Flex direction="row" mt="auto" mb="auto" alignItems="center">
+        {showMap && (
+          <SidebarMap
+            tabs={["ITB", "Buah Batu", "Peru- mahan"]}
+            onChange={handleMapChange}
+            selected={selectedMap}
+          />
+        )}
         <Spacer />
         <SidebarAlgo
           tabs={[distance, "UCS", "A*"]}
           selected={selectedAlgo}
           onChange={handleAlgoChange}
+          onShowLabel={onSwitchLabel}
+          showLabel={showLabel}
         />
       </Flex>
-      <PopoverHelp map={showMap}/>
+      <PopoverHelp map={showMap} />
     </Flex>
   );
 }
 
 export default App;
+

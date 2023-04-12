@@ -8,6 +8,52 @@ function NetworkGraph(props) {
   const [startEndNodes, setStartEndNodes] = useState([-1, -1]);
   const [graphKey, setGraphKey] = useState(uuidv4());
   const [content, setContent] = useState("");
+
+  function createGraph(adjacencyMatrixString) {
+    // rekomendasi jarak antar node adalah > 10 supaya tidak terlihat terlalu dempet
+    const asArray = adjacencyMatrixString
+      .split("\n")
+      .map((row) => row.split(" ").map((val) => parseFloat(val)));
+
+    var n = -1;
+    for (let i = 0; i < asArray.length; i++) {
+      if (asArray[i].length === 1) {
+        n = i;
+      }
+    }
+
+    const adjacencyMatrix = asArray.slice(0, n + 1);
+    const coordinates = asArray.slice(n + 1, asArray.length);
+
+    // console.log(adjacencyMatrix);
+    // console.log(coordinates);
+
+    // Create the nodes for the graph
+    const nodes = coordinates.map((coord, index) => {
+      return {
+        id: index,
+        x: coord[0] * 10,
+        y: coord[1] * 10,
+        label: props.showLabel ? "Node " + index : "",
+      };
+    });
+
+    // Create the edges for the graph
+    const edges = [];
+    for (let i = 0; i < adjacencyMatrix.length; i++) {
+      for (let j = i + 1; j < adjacencyMatrix[i].length; j++) {
+        if (adjacencyMatrix[i][j] === 1) {
+          const length = Math.sqrt(
+            Math.pow(coordinates[j][0] - coordinates[i][0], 2) +
+              Math.pow(coordinates[j][1] - coordinates[i][1], 2)
+          ).toFixed(1);
+          edges.push({ from: i, to: j, label: props.showLabel ? length : "" });
+        }
+      }
+    }
+    return { nodes, edges };
+  }
+
   var returnVal;
   if (props.content === "") {
     returnVal = null;
@@ -75,7 +121,7 @@ function NetworkGraph(props) {
       return {
         ...node,
         label: label,
-        font : {
+        font: {
           color: font,
         },
         color: {
@@ -109,51 +155,6 @@ function NetworkGraph(props) {
 }
 
 export default NetworkGraph;
-
-function createGraph(adjacencyMatrixString) {
-  // rekomendasi jarak antar node adalah > 10 supaya tidak terlihat terlalu dempet
-  const asArray = adjacencyMatrixString
-    .split("\n")
-    .map((row) => row.split(" ").map((val) => parseFloat(val)));
-
-  var n = -1;
-  for (let i = 0; i < asArray.length; i++) {
-    if (asArray[i].length === 1) {
-      n = i;
-    }
-  }
-
-  const adjacencyMatrix = asArray.slice(0, n + 1);
-  const coordinates = asArray.slice(n + 1, asArray.length);
-
-  // console.log(adjacencyMatrix);
-  // console.log(coordinates);
-
-  // Create the nodes for the graph
-  const nodes = coordinates.map((coord, index) => {
-    return {
-      id: index,
-      x: coord[0] * 10,
-      y: coord[1] * 10,
-      label: "Node " + index,
-    };
-  });
-
-  // Create the edges for the graph
-  const edges = [];
-  for (let i = 0; i < adjacencyMatrix.length; i++) {
-    for (let j = i + 1; j < adjacencyMatrix[i].length; j++) {
-      if (adjacencyMatrix[i][j] === 1) {
-        const length = Math.sqrt(
-          Math.pow(coordinates[j][0] - coordinates[i][0], 2) +
-            Math.pow(coordinates[j][1] - coordinates[i][1], 2)
-        ).toFixed(1);
-        edges.push({ from: i, to: j, label: length, length: length });
-      }
-    }
-  }
-  return { nodes, edges };
-}
 
 function colorEdgesBetweenNodes(nodesList, graph) {
   const { nodes, edges } = graph;
