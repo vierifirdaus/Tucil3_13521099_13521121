@@ -87,8 +87,7 @@ Program sederhana untuk menentukan lintasan terpendek berdasarkan peta Google Ma
 
 ## Contact
 <h4 align="center">
-  Contact Me : 13521099@mahasiswa.itb.ac.id<br/>
-  Contact Me : 13521121@mahasiswa.itb.ac.id<br/>
+  Contact Us : Vieri & Saddam<br/>
   2023.
 </h4>
 <hr>
