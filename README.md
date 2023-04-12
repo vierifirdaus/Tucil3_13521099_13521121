@@ -60,7 +60,7 @@ https://user-images.githubusercontent.com/88727278/231496416-7c599d5a-e703-44a1-
   <img src="/doc/AWAL.png/">
   <p>Gambar 1. Tampilan Awal Program</p>
   <nl>
-  <img src=" src="/doc/2.png/">
+  <img src=" src="/doc/3.png/">
   <p>Gambar 2. Visualisasi Peta</p>
   <nl>
   <img src="/doc/ASTAR1.png/">
