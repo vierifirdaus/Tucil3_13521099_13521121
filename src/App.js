@@ -3,11 +3,8 @@ import Toolbar from "./Toolbar/Toolbar";
 import Map from "./Map/Map";
 import { useState } from "react";
 import NetworkGraph from "./NetworkGraph/NetworkGraph";
-import { UCS } from "./ShortestPath/UCS";
-import {
-  aStar,
-  parserInputA,
-} from "./ShortestPath/Astar";
+import { UCS, parserInputUCS } from "./ShortestPath/UCS";
+import { aStar, parserInputA, distance } from "./ShortestPath/Astar";
 import SidebarAlgo from "./Sidebar/SidebarAlgo";
 import PopoverHelp from "./PopoverHelp/PopoverHelp";
 import SidebarMap from "./Sidebar/SidebarMap";
@@ -15,6 +12,7 @@ import mapItb from "./Asset/ITB.txt";
 import mapBuahbatu from "./Asset/buahbatu.txt";
 import mapPerumahan from "./Asset/perumahan.txt";
 import InvalidAlertDialog from "./InvalidAlertDialog/InvalidAlertDialog";
+import checkInput from "./ShortestPath/checkInput";
 
 function App() {
   const [showMap, setShowMap] = useState(false);
@@ -41,10 +39,16 @@ function App() {
   };
 
   const onReadFileHandler = (value) => {
-    setShowLabel(true);
-    setSelectedMap("");
-    resetGraph();
-    setFileContent(value);
+    console.log(value)
+    if (checkInput(value, !showMap)) {
+      setShowLabel(true);
+      setSelectedMap("");
+      resetGraph();
+      setFileContent(value);
+    } else {
+      setIsAlertOpen(true)
+      setAlertInfo({title:"Invalid File Input", desc: "The file input is not in the correct format. Please check README.md for the file format rules."})
+    }
   };
 
   const onStartEndNodeClickHanlder = (value) => {

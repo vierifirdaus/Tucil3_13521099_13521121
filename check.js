@@ -1,10 +1,10 @@
-function parseInputString(inputString,keterangan) {
+function checkInput(inputString,keterangan) {
   // Split the input string into lines
   const lines = inputString.trim().split("\n");
 
   // menghapus baris kosong
   for(let i = 0; i < lines.length; i++) {
-    if(lines[i]==''){
+    if(lines[i]=='' || lines[i]=='\r'){
       lines.splice(i, 1);
     }
   }
@@ -67,7 +67,7 @@ function parseInputString(inputString,keterangan) {
   }
   return true
 }
-
-const inputString = "1 0 0\n 0 0 0\n 0 0 0\n\n 1 2\n 2 180\n 3 3\n";
-const result = parseInputString(inputString,false);
+// export {checkInput}
+const inputString = "0 1 1 1\n1 0 1 1\n1 1 0 1\n1 1 1 0\n20 30\n0 70\n90 10\n0 0";
+const result = checkInput(inputString,true);
 console.log(result); // logs the nested array
