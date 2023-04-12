@@ -30,7 +30,7 @@ Program sederhana untuk menentukan lintasan terpendek berdasarkan peta Google Ma
 <a name="features"></a>
 
 ## Features
-- Program dapat menerima input file config ber-ekstensi `txt` dengan ketentuan sebagai <a href=""> berikut</a>
+- Program dapat menerima input file config ber-ekstensi `txt` dengan ketentuan sebagai <a href="https://github.com/vierifirdaus/Tucil3_13521099_13521121/blob/main/test/README.md"> berikut</a>
 - Menampilkan `peta` untuk visualisasi rute
 - Menampilkan `edge` untuk tiap instansiasi jalan pada peta
 - Pengguna dapat memilih `algoritma` yang akan digunakan serta `view` yang akan ditampilkan pada peta
@@ -49,9 +49,6 @@ Program sederhana untuk menentukan lintasan terpendek berdasarkan peta Google Ma
 
 
 ## Video Captures
-![TUCIL3 GIF](https://github.com/vierifirdaus/Tucil3_13521099_13521121/blob/main/doc/1.gif?raw=true)
-
-
 https://user-images.githubusercontent.com/88727278/231496416-7c599d5a-e703-44a1-a111-1847df6b79e3.mp4
 
 
