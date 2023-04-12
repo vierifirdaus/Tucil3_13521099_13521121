@@ -52,9 +52,9 @@ Program sederhana untuk menentukan lintasan terpendek berdasarkan peta Google Ma
 <a name="video-captures"></a>
 
 ## Video Captures
+![TUCIL3 GIF](https://github.com/vierifirdaus/Tucil3_13521099_13521121/blob/main/doc/1.gif?raw=true)
 
-![VIDEO]([https://github.com/vierifirdaus/Tucil3_13521099_13521121/doc/1.gif?raw=true](https://github.com/vierifirdaus/Tucil3_13521099_13521121/blob/main/doc/1.gif)
-)
+![VIDEO]([https://github.com/vierifirdaus/Tucil3_13521099_13521121/doc/1.gif?raw=true])
 
 ## Screenshots
 <p>
