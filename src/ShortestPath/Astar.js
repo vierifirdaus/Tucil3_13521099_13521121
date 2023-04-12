@@ -108,7 +108,7 @@ function parserInputA(inputStr,keterangan) {
     }
     for(let i=0;i<coordinates.length;i++){
         for(let j=0;j<coordinates.length;j++){
-            if(matrix[i][j]===1){
+            if(matrix[i][j]==1){
                 matrix[i][j] = distance(coordinates[i],coordinates[j],keterangan)
             }
         }

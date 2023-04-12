@@ -4,7 +4,7 @@ import Map from "./Map/Map";
 import { useState } from "react";
 import NetworkGraph from "./NetworkGraph/NetworkGraph";
 import { UCS, parserInputUCS } from "./ShortestPath/UCS";
-import { aStar, parserInputA, distance } from "./ShortestPath/Astar";
+import { aStar, parserInputA, distance,distance_map } from "./ShortestPath/Astar";
 import SidebarAlgo from "./Sidebar/SidebarAlgo";
 import PopoverHelp from "./PopoverHelp/PopoverHelp";
 import SidebarMap from "./Sidebar/SidebarMap";
@@ -78,12 +78,26 @@ function App() {
     } else {
       let res;
       if (selectedAlgo == "UCS") {
-        const parser = parserInputA(fileContent, !showMap);
+        const parser = parserInputA(fileContent, false);
         res = UCS(parser.matrix, startEnd[0], startEnd[1]);
+        // 231 232 233 380 16 6 489
+        console.log(parser.matrix[411][16])
+        console.log(parser.matrix[411][380])
+        console.log(parser.matrix[411][407])
+        console.log(parser.matrix[16][407])
+        console.log(parser.matrix[16][380])
+        console.log(parser.matrix[380][407])
+        // console.log(distance(parser.coordinates[411], parser.coordinates[16],false))
+        // console.log(parser.matrix[380][16])
+        // console.log(parser.matrix[16][6])
+        // console.log(parser.matrix[6][489])
       } else {
         const parser = parserInputA(fileContent, !showMap);
         res = aStar(parser, startEnd[0], startEnd[1], !showMap);
       }
+      console.log(startEnd[1], startEnd[0])
+      console.log(res.pathTotal)
+      
       setPath(res.pathTotal);
       setDistance(res.distanceMinimum.toFixed(1));
     }
