@@ -51,39 +51,29 @@ Program sederhana untuk menentukan lintasan terpendek berdasarkan peta Google Ma
 ## Video Captures
 ![TUCIL3 GIF](https://github.com/vierifirdaus/Tucil3_13521099_13521121/blob/main/doc/1.gif?raw=true)
 
+
+https://user-images.githubusercontent.com/88727278/231496416-7c599d5a-e703-44a1-a111-1847df6b79e3.mp4
+
+
 ## Screenshots
 <p>
-  <p>Simulasi pencarian dengan 16 titik derajat tiga</p>
-  <img src="/image/ss1.png/">
+  <img src="/doc/AWAL.png/">
+  <p>Gambar 1. Tampilan Awal Program</p>
   <nl>
-  
-  <p>Penggambaran pada bidang tiga dimensi</p>
-  <img src="/image/p1.png/">
+  <img src=" src="/doc/3.png/">
+  <p>Gambar 2. Visualisasi Peta</p>
   <nl>
-  
-  
-  <p>Simulasi pencarian dengan 64 titik derajat tiga</p>
-  <img src="/image/ss2.png/">
+  <img src="/doc/ASTAR1.png/">
+  <p>Gambar 3. Algoritma A*</p>
   <nl>
-  
-  <p>Penggambaran pada bidang tiga dimensi</p>
-  <img src="/image/p2.png/">
+  <img src="/doc/3.png/">
+  <p>Gambar 4. Algoritma UCS</p>
   <nl>
-  
-  <p>Simulasi pencarian dengan 128 titik derajat tiga</p>
-  <img src="/image/ss3.png/">
+  <img src="/doc/salahinput.png/">
+  <p>Gambar 5. Ketika salah input</p>
   <nl>
-
-  <p>Penggambaran pada bidang tiga dimensi</p>
-  <img src="/image/p1.png/">
-  <nl>
-  
-  
-  <p>Simulasi pencarian dengan 100 titik derajat sepuluh</p>
-  <img src="/image/ss6.png/">
-  <nl>
-  
 </p>
+
 
 
 <a name="contact"></a>
