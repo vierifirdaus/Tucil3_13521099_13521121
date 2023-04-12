@@ -1,3 +1,4 @@
+<p>
 Format file terdiri dari 2 bagian(matrix adjency dan koordinat titik)
 
 Format matrix adjency :
@@ -29,3 +30,4 @@ Contoh input.txt :
 68 12
 <nl>
 76 90
+  </p>
