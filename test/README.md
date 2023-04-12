@@ -10,6 +10,7 @@ Format koordinat titik :
 2. Untuk input map elemen memiliki rentang dari -180 sampai 180
 
 Contoh input.txt :
+<br/>
 0 1 1 0 0
 <br/>
 1 0 1 1 0
