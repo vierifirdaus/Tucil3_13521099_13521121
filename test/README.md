@@ -10,13 +10,22 @@ Format koordinat titik :
 
 Contoh input.txt :
 0 1 1 0 0
+<nl>
 1 0 1 1 0
+<nl>
 1 1 0 0 1
+<nl>
 0 1 0 0 1
+<nl>
 0 0 1 1 0
+<nl>
 
 78 17
+<nl>
 32 12
+<nl>
 20 19
+<nl>
 68 12
+<nl>
 76 90
