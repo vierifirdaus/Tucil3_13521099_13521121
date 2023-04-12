@@ -42,10 +42,11 @@ Program sederhana untuk menentukan lintasan terpendek berdasarkan peta Google Ma
 
 ## Pemakaian
 1. Buka terminal pada path yang sesuai dengan program
-3. Jalankan command `npm i react`
-4. Masukkan input banyak derajat
-5. Masukkan input banyak titik 
-6. Apabila input derajat 2 atau 3 akan ada perintah untuk menampilkan visualisasi, apabila ingin menampilkan visualisasi ketik command `y`
+2. Jalankan command `npm install`
+3. Jalankan command `npm start`
+4. Program akan terbuka dan dapat digunakan
+
+Selain itu, program juga dapat diakses secara online melalui <a href=https://saddamannais.github.io/Tucil3_13521099_13521121> link berikut<a/>
 
 
 ## Video Captures
