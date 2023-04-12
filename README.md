@@ -46,7 +46,14 @@ Program sederhana untuk menentukan lintasan terpendek berdasarkan peta Google Ma
 4. Masukkan input banyak derajat
 5. Masukkan input banyak titik 
 6. Apabila input derajat 2 atau 3 akan ada perintah untuk menampilkan visualisasi, apabila ingin menampilkan visualisasi ketik command `y`
+
+
 <a name="screenshots"></a>
+<a name="video-captures"></a>
+
+## Video Captures
+
+![TUCIL3 GIF](https://github.com/vierifirdaus/Tucil3_13521099_13521121/doc/1.gif?raw=true)
 
 ## Screenshots
 <p>
