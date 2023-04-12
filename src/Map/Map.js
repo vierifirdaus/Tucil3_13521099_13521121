@@ -55,7 +55,7 @@ function Map(props) {
   };
 
   const polylineOptions = (arr, edgeid) => {
-    let color = "#FFFFFF";
+    let color = "#234E52";
 
     for (let i = 0; i < arr.length - 1; i++) {
       if (
@@ -151,46 +151,44 @@ function Map(props) {
         />
       ))}
       {graph.edges.map((edge) => (
-        <Polyline
-          key={edge.id}
-          path={[
-            { lat: edge.start.latitude, lng: edge.start.longitude },
-            { lat: edge.end.latitude, lng: edge.end.longitude },
-          ]}
-          options={polylineOptions(props.path, edge.id)}
-        />
-      ))}
-
-      {graph.edges.map((edge) => (
-        <InfoBox
-          key={edge.id + "-len"}
-          position={{
-            lat: (edge.start.latitude + edge.end.latitude) / 2,
-            lng: (edge.start.longitude + edge.end.longitude) / 2,
-          }}
-          options={{
-            isHidden: !props.showLabel,
-            disableAutoPan : true,
-            closeBoxURL: " ",
-            boxStyle: {
-              width: "50px",              
-              // padding: "5px",
-              "border-radius": "20px",
-              "backgorund-color": "white",
-            },
-          }}
-        >
-          <Text bg="white" p="5px" fontWeight="medium" textAlign="right">
-            {(
-              distance_map(
-                edge.start.latitude,
-                edge.start.longitude,
-                edge.end.latitude,
-                edge.end.longitude
-              ) * 1000
-            ).toFixed(1)}
-          </Text>
-        </InfoBox>
+        <>
+          <Polyline
+            key={edge.id}
+            path={[
+              { lat: edge.start.latitude, lng: edge.start.longitude },
+              { lat: edge.end.latitude, lng: edge.end.longitude },
+            ]}
+            options={polylineOptions(props.path, edge.id)}
+          />
+          <InfoBox
+            key={edge.id + "-len"}
+            position={{
+              lat: (edge.start.latitude + edge.end.latitude) / 2,
+              lng: (edge.start.longitude + edge.end.longitude) / 2,
+            }}
+            options={{
+              isHidden: !props.showLabel,
+              disableAutoPan: true,
+              closeBoxURL: " ",
+              boxStyle: {
+                width: "50px",
+                // padding: "5px",
+                "border-radius": "20px",
+              },
+            }}
+          >
+            <Text p="5px" fontWeight="medium" textAlign="right" bgColor="#B2F5EA" color="black">
+              {(
+                distance_map(
+                  edge.start.latitude,
+                  edge.start.longitude,
+                  edge.end.latitude,
+                  edge.end.longitude
+                ) * 1000
+              ).toFixed(1)}
+            </Text>
+          </InfoBox>
+        </>
       ))}
     </GoogleMap>
   );
