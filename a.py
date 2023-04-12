@@ -1,6 +1,6 @@
 # Open the input file in read mode
 # inp='test\\bonus 2 - dago.txt'
-inp='src\Asset\\perumahan.txt'
+inp='test\\nonbonus 1.txt'
 with open(inp, 'r') as file:
     # Read the matrix from the file
     matrix = [[num for num in line.split()] for line in file]
