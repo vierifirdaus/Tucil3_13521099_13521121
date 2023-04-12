@@ -57,7 +57,13 @@ function aStar(fullGraph, start, finish, keterangan){
     let graph = fullGraph.matrix;
     let point = fullGraph.coordinates;
     const liveNode = new PriorityQueue()
-
+    for(let i=0;i<graph.length;i++){
+        for(let j=0;j<graph.length;j++){
+            if(graph[i][j]!=0){
+                graph[i][j] =distance(point[i],point[j],keterangan);
+            }
+        }
+    }
     liveNode.enqueue([start],0)
     let pathTotal=null
     const weight = new Array(graph.length).fill(Infinity)
@@ -108,7 +114,7 @@ function parserInputA(inputStr,keterangan) {
     }
     for(let i=0;i<coordinates.length;i++){
         for(let j=0;j<coordinates.length;j++){
-            if(matrix[i][j]==1){
+            if(matrix[i][j]!=0){
                 matrix[i][j] = distance(coordinates[i],coordinates[j],keterangan)
             }
         }

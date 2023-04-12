@@ -27,6 +27,7 @@ function Toolbar(props) {
       reader.onload = function (event) {
         const contents = event.target.result;
         props.onReadFile(contents);
+        console.log(contents);
       };
 
       reader.readAsText(file);
