@@ -68,6 +68,6 @@ function checkInput(inputString,keterangan) {
   return true
 }
 // export {checkInput}
-const inputString = "0 1 1 1\n1 0 1 1\n1 1 0 1\n1 1 1 0\n20 30\n0 70\n90 10\n0 0";
-const result = checkInput(inputString,true);
-console.log(result); // logs the nested array
+// const inputString = "0 1 1 1\n1 0 1 1\n1 1 0 1\n1 1 1 0\n20 30\n0 70\n90 10\n0 0";
+// const result = checkInput(inputString,true);
+// console.log(result); // logs the nested array
