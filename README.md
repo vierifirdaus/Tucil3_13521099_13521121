@@ -49,7 +49,9 @@ Program sederhana untuk menentukan lintasan terpendek berdasarkan peta Google Ma
 
 
 ## Video Captures
-https://user-images.githubusercontent.com/88727278/231496416-7c599d5a-e703-44a1-a111-1847df6b79e3.mp4
+
+https://user-images.githubusercontent.com/88727278/231507124-9273dd7f-f979-4aed-9790-da523513a21b.mp4
+
 
 
 ## Screenshots
@@ -57,17 +59,20 @@ https://user-images.githubusercontent.com/88727278/231496416-7c599d5a-e703-44a1-
   <img src="/doc/AWAL.png/">
   <p>Gambar 1. Tampilan Awal Program</p>
   <nl>
-  <img src=" src="/doc/3.png/">
+  <img src=" src="/doc/astar2.png/">
   <p>Gambar 2. Visualisasi Peta</p>
   <nl>
-  <img src="/doc/ASTAR1.png/">
+  <img src="/doc/astar2.png/">
   <p>Gambar 3. Algoritma A*</p>
   <nl>
-  <img src="/doc/3.png/">
+  <img src="/doc/ucs1.png/">
   <p>Gambar 4. Algoritma UCS</p>
   <nl>
+  <img src="/doc/daerah.png/">
+  <p>Gambar 5. Peta Daerah UCS</p>
+  <nl>
   <img src="/doc/salahinput.png/">
-  <p>Gambar 5. Ketika salah input</p>
+  <p>Gambar 6. Ketika salah input</p>
   <nl>
 </p>
 
