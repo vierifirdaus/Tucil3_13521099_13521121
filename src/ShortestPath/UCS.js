@@ -54,7 +54,7 @@ function UCS(graph, start, finish){
         }
 
         for(let i=0;i<graph[current.element[0]].length;i++){
-            if(graph[current.element[0]][i] !== 0){
+            if(graph[current.element[0]][i] > 0){
                 const newWeight = current.priority + graph[current.element[0]][i]
                 if(newWeight < weight[i]){
                     weight[i] = newWeight
