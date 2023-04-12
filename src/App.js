@@ -40,7 +40,7 @@ function App() {
   };
 
   const onReadFileHandler = (value) => {
-    console.log(value)
+    // console.log(value)
     if (checkInput(value, !showMap)) {
       setShowLabel(true);
       setSelectedMap("");
@@ -99,7 +99,7 @@ function App() {
       }
       // console.log(startEnd[1], startEnd[0])
       // console.log(res.pathTotal)
-      console.log(res.pathTotal);
+      // console.log(res.pathTotal);
       setPath(res.pathTotal);
       setDistance(res.distanceMinimum.toFixed(1));
     }
