@@ -25,7 +25,7 @@ function checkInput(inputString, keterangan) {
   // elemen 1/0
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < rows; j++) {
-      if (matrix[i][j] !== 1 && matrix[i][j] !== 0) {
+      if (matrix[i][j] != 1 && matrix[i][j] != 0) {
         return false;
       }
     }
