@@ -24,6 +24,7 @@ function App() {
   const [selectedMap, setSelectedMap] = useState("");
 
   const onSwitchToggleHandle = (value) => {
+    setShowLabel(true);
     setShowMap(value);
     setFileContent("");
     setSelectedMap("");
@@ -35,7 +36,7 @@ function App() {
   };
 
   const onReadFileHandler = (value) => {
-    console.log("test")
+    setShowLabel(true);
     setSelectedMap("");
     resetGraph();
     setFileContent(value);
@@ -46,7 +47,6 @@ function App() {
   };
 
   const resetGraph = (value) => {
-    setShowLabel(true);
     setPath([]);
     setDistance(0);
     setStartEnd([-1, -1]);
@@ -61,6 +61,7 @@ function App() {
   const handleMapChange = (value) => {
         // console.log('value')
     if (value !== selectedMap) {
+      resetGraph();
       setSelectedMap(value);
       if (value === "ITB") setFileContent(mapItb);
       else if (value === "Buah Batu") setFileContent(mapBuahbatu);
