@@ -21,7 +21,6 @@ function checkInput(inputString, keterangan) {
       return false;
     }
   }
-
   // elemen 1/0
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < rows; j++) {
