@@ -1,5 +1,5 @@
 # Open the input file in read mode
-with open('src\Asset\\perumahan.txt', 'r') as file:
+with open('test\\bonus 5 - Kelapa Gading.txt', 'r') as file:
     # Read the matrix from the file
     matrix = [[num for num in line.split()] for line in file]
 temp = []
@@ -19,7 +19,7 @@ for i in range(len(matrix)):
             asu=asu+1
 # print(asu)
 j=0
-with open('src\Asset\\perumahan.txt', 'w') as file:
+with open('test\\bonus 5 - Kelapa Gading.txt', 'w') as file:
     # Write the updated matrix to the file
     for row in matrix:
         file.write(' '.join(str(num) for num in row) + '\n')
