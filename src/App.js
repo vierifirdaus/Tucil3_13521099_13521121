@@ -11,6 +11,7 @@ import SidebarMap from "./Sidebar/SidebarMap";
 import mapItb from "./Asset/ITB.txt";
 import mapBuahbatu from "./Asset/buahbatu.txt";
 import mapPerumahan from "./Asset/perumahan.txt";
+import mapPekanbaru from "./Asset/pekanbaru.txt";
 import InvalidAlertDialog from "./InvalidAlertDialog/InvalidAlertDialog";
 import checkInput from "./ShortestPath/checkInput";
 
@@ -75,6 +76,7 @@ function App() {
       if (value === "ITB") setFileContent(mapItb);
       else if (value === "Buah Batu") setFileContent(mapBuahbatu);
       else if (value === "Peru- mahan") setFileContent(mapPerumahan);
+      else if (value === "Pekan- baru") setFileContent(mapPekanbaru);
     }
   };
 
@@ -140,7 +142,7 @@ function App() {
         <Flex direction="row" mt="auto" mb="auto" alignItems="center">
           {showMap && (
             <SidebarMap
-              tabs={["ITB", "Buah Batu", "Peru- mahan"]}
+              tabs={["ITB", "Buah Batu", "Peru- mahan", "Pekan- baru"]}
               onChange={handleMapChange}
               selected={selectedMap}
             />

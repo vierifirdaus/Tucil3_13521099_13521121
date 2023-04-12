@@ -29,7 +29,7 @@ function SidebarMap({ tabs, selected, onChange }) {
               fontWeight: selected === tab ? "bold" : "normal",
               bg: selected === tab ? "teal.500" : "white",
               w: "55px",
-              h: "160px",
+              h: "100px",
             }}
           >
             {tab}
