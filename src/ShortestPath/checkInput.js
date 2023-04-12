@@ -8,7 +8,9 @@ function checkInput(inputString,keterangan) {
         lines.splice(i, 1);
       }
     }
-  
+
+    // console.log(lines)
+    
     const rows=lines[0].trim().split(" ").length;
     const matrix=[]
   
@@ -21,7 +23,8 @@ function checkInput(inputString,keterangan) {
         return false;
       }
     }
-  
+    console.log(matrix)
+    
     // elemen 1/0
     for(let i=0;i<rows;i++){
       for(let j=0;j<rows;j++){
@@ -30,15 +33,17 @@ function checkInput(inputString,keterangan) {
         }
       }
     }
-  
+    
     // mengecek (x,y) = (y,x)
     for(let i=0;i<rows;i++){
       for(let j=0;j<rows;j++){
         if(matrix[i][j]!=matrix[j][i]){
+          console.log(i,j)
           return false;
         }
       }
     }
+    console.log("aman")
     // console.log("asu",rows,lines.length)
     // console.log(lines)
     // console.log(matrix)
