@@ -75,7 +75,7 @@ function aStar(fullGraph, start, finish, keterangan){
         }
 
         for(let i=0;i<graph[current.element[0]].length;i++){
-            if(graph[current.element[0]][i] !== 0){
+            if(graph[current.element[0]][i] > 0){
                 const newDistance = weight[current.element[0]] + graph[current.element[0]][i]
                 // console.log(current.element[0],i) 
                 if(newDistance < weight[i]){
