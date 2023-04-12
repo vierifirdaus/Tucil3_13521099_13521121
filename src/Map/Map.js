@@ -143,8 +143,8 @@ function Map(props) {
       {graph.nodes.map((node) => (
         <Marker
           key={node.id}
-          // label={node.id.toString()}
-          // opacity="1"
+          label={node.id.toString()}
+          opacity="1"
           position={{ lat: node.latitude, lng: node.longitude }}
           icon={fillColor(startEndNodes, node.id)}
           onClick={() => markerClickHandler(node.id)}
