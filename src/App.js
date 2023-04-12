@@ -1,17 +1,20 @@
-import { Box, Flex, HStack, Spacer } from "@chakra-ui/react";
+import { Box, Flex, Spacer } from "@chakra-ui/react";
 import Toolbar from "./Toolbar/Toolbar";
 import Map from "./Map/Map";
 import { useState } from "react";
 import NetworkGraph from "./NetworkGraph/NetworkGraph";
-import { UCS, parserInputUCS } from "./ShortestPath/UCS";
-import { aStar, parserInputA, distance,distance_map } from "./ShortestPath/Astar";
+import { UCS } from "./ShortestPath/UCS";
+import {
+  aStar,
+  parserInputA,
+} from "./ShortestPath/Astar";
 import SidebarAlgo from "./Sidebar/SidebarAlgo";
 import PopoverHelp from "./PopoverHelp/PopoverHelp";
 import SidebarMap from "./Sidebar/SidebarMap";
-import { useEffect } from "react";
-import mapItb from './Asset/ITB.txt';
-import mapBuahbatu from './Asset/buahbatu.txt';
-import mapPerumahan from './Asset/perumahan.txt';
+import mapItb from "./Asset/ITB.txt";
+import mapBuahbatu from "./Asset/buahbatu.txt";
+import mapPerumahan from "./Asset/perumahan.txt";
+import InvalidAlertDialog from "./InvalidAlertDialog/InvalidAlertDialog";
 
 function App() {
   const [showMap, setShowMap] = useState(false);
@@ -22,6 +25,8 @@ function App() {
   const [selectedAlgo, setSelectedAlgo] = useState("UCS");
   const [showLabel, setShowLabel] = useState(true);
   const [selectedMap, setSelectedMap] = useState("");
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
+  const [alertInfo, setAlertInfo] = useState({title:"", desc:""});
 
   const onSwitchToggleHandle = (value) => {
     setShowLabel(true);
@@ -59,7 +64,7 @@ function App() {
   };
 
   const handleMapChange = (value) => {
-        // console.log('value')
+    // console.log('value')
     if (value !== selectedMap) {
       resetGraph();
       setSelectedMap(value);
@@ -71,11 +76,12 @@ function App() {
 
   const onSearchPathHandler = (value) => {
     if (fileContent == "") {
-      alert("Please input a map file.");
+      setIsAlertOpen(true);
+      if (showMap) setAlertInfo({title: "Invalid Action", desc: "Please select a map from the left sidebar or input a map file."});
+      else setAlertInfo({title: "Invalid Action", desc: "Please input a graph file."});
     } else if (startEnd[0] == -1 || startEnd[1] == -1) {
-      alert(
-        "Please select the starting and ending nodes by clicking on the desired node."
-      );
+      setIsAlertOpen(true);
+      setAlertInfo({title: "Invalid Action", desc: "Please select the starting and ending nodes by clicking on the desired node."})
     } else {
       let res;
       if (selectedAlgo == "UCS") {
@@ -87,66 +93,68 @@ function App() {
       }
       // console.log(startEnd[1], startEnd[0])
       // console.log(res.pathTotal)
-      console.log(res.pathTotal)
+      console.log(res.pathTotal);
       setPath(res.pathTotal);
       setDistance(res.distanceMinimum.toFixed(1));
     }
   };
 
   return (
-    <Flex
-      position="relative"
-      flexDirection="column"
-      bgPos="bottom"
-      h="100vh"
-      w="100vw"
-      bgColor={"gray.800"}
-    >
-      <Box position="absolute" left={0} top={0} h="100%" w="100%">
-        {showMap && (
-          <Map
-            content={fileContent}
-            onStartEndNodeClick={onStartEndNodeClickHanlder}
-            path={path}
-            showLabel={showLabel}
-          />
-        )}
-        {!showMap && (
-          <NetworkGraph
-            content={fileContent}
-            path={path}
-            newGraph={resetGraph}
-            onStartEndNodeClick={onStartEndNodeClickHanlder}
-            showLabel={showLabel}
-          />
-        )}
-      </Box>
-      <Toolbar
-        onSwitchToggle={onSwitchToggleHandle}
-        onReadFile={onReadFileHandler}
-        onSearch={onSearchPathHandler}
-      />
-      <Flex direction="row" mt="auto" mb="auto" alignItems="center">
-        {showMap && (
-          <SidebarMap
-            tabs={["ITB", "Buah Batu", "Peru- mahan"]}
-            onChange={handleMapChange}
-            selected={selectedMap}
-          />
-        )}
-        <Spacer />
-        <SidebarAlgo
-          tabs={[distance, "UCS", "A*"]}
-          selected={selectedAlgo}
-          onChange={handleAlgoChange}
-          onShowLabel={onSwitchLabel}
-          showLabel={showLabel}
+    <>
+      <Flex
+        position="relative"
+        flexDirection="column"
+        bgPos="bottom"
+        h="100vh"
+        w="100vw"
+        bgColor={"gray.800"}
+      >
+        <Box position="absolute" left={0} top={0} h="100%" w="100%">
+          {showMap && (
+            <Map
+              content={fileContent}
+              onStartEndNodeClick={onStartEndNodeClickHanlder}
+              path={path}
+              showLabel={showLabel}
+            />
+          )}
+          {!showMap && (
+            <NetworkGraph
+              content={fileContent}
+              path={path}
+              newGraph={resetGraph}
+              onStartEndNodeClick={onStartEndNodeClickHanlder}
+              showLabel={showLabel}
+            />
+          )}
+        </Box>
+        <Toolbar
+          onSwitchToggle={onSwitchToggleHandle}
+          onReadFile={onReadFileHandler}
+          onSearch={onSearchPathHandler}
         />
+        <Flex direction="row" mt="auto" mb="auto" alignItems="center">
+          {showMap && (
+            <SidebarMap
+              tabs={["ITB", "Buah Batu", "Peru- mahan"]}
+              onChange={handleMapChange}
+              selected={selectedMap}
+            />
+          )}
+          <Spacer />
+          <SidebarAlgo
+            tabs={[distance, "UCS", "A*"]}
+            selected={selectedAlgo}
+            onChange={handleAlgoChange}
+            onShowLabel={onSwitchLabel}
+            showLabel={showLabel}
+          />
+        </Flex>
+        <PopoverHelp map={showMap} />
       </Flex>
-      <PopoverHelp map={showMap} />
-    </Flex>
+      <InvalidAlertDialog isOpen={isAlertOpen} info={alertInfo} onClose={() => setIsAlertOpen(false)}/>
+    </>
   );
 }
 
 export default App;
-

@@ -36,7 +36,7 @@ const PopoverHelp = (props) => {
         <PopoverHeader fontWeight="bold" >Need some help?</PopoverHeader>
         <PopoverBody>
           To set the starting and ending nodes, simply click on the desired node, and then click the rightmost button located on the toolbar. Click the node again to unselect it.
-          The path length is on top of the right sidebar.
+          The path length is under the label switch on top of the right sidebar.
           {props.map && " The label length is in meters while the total path length is in kilometers. You can pick a readily available map from the left sidebar. You can also upload your own from the input file"}
         </PopoverBody>
       </PopoverContent>

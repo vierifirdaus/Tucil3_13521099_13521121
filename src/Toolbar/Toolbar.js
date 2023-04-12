@@ -7,6 +7,7 @@ import {
   Switch,
   VStack,
   Spacer,
+  Flex,
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
 import { FaLocationArrow, FaTimes } from "react-icons/fa";
@@ -36,19 +37,20 @@ function Toolbar(props) {
   }
 
   return (
-    <Box
-      p={4}
-      borderRadius="xl"
-      mt={4}
-      bgColor="white"
-      shadow="base"
-      minW="container.md"
-      zIndex="modal"
-      maxW="230px"
-      ml="auto"
-      mr="auto"
-    >
-      <HStack spacing={4}>
+    <Flex zIndex="modal">
+      <HStack
+        flexBasis={{base: "90%", sm: "85%", md: "70%", lg: "70%"}}
+        maxW="container.md"
+        spacing={4}
+        w="container.sm"
+        p={4}
+        borderRadius="xl"
+        bgColor="white"
+        shadow="base"
+        ml="auto"
+        mr="auto"
+        mt={4}
+      >
         <Switch
           id="mapToggle"
           size="lg"
@@ -74,7 +76,7 @@ function Toolbar(props) {
           onClick={() => props.onSearch()}
         />
       </HStack>
-    </Box>
+    </Flex>
   );
 }
 
